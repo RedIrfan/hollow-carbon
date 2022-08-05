@@ -1,0 +1,102 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "KinematicBody2D",
+"class": "Character",
+"language": "GDScript",
+"path": "res://Objects/Characters/Character.gd"
+}, {
+"base": "Node2D",
+"class": "CharacterPivot",
+"language": "GDScript",
+"path": "res://Objects/Characters/CharacterPivot.gd"
+}, {
+"base": "Node",
+"class": "State",
+"language": "GDScript",
+"path": "res://Objects/Scripts/State.gd"
+}, {
+"base": "State",
+"class": "StateCharacter",
+"language": "GDScript",
+"path": "res://Objects/Characters/State/StateCharacter.gd"
+}, {
+"base": "StateCharacter",
+"class": "StateCharacterHurt",
+"language": "GDScript",
+"path": "res://Objects/Characters/State/StateCharacterHurt.gd"
+}, {
+"base": "Node",
+"class": "StateMaster",
+"language": "GDScript",
+"path": "res://Objects/Scripts/StateMaster.gd"
+}, {
+"base": "StateCharacter",
+"class": "StatePlayer",
+"language": "GDScript",
+"path": "res://Objects/Characters/Player/State/StatePlayer.gd"
+} ]
+_global_script_class_icons={
+"Character": "",
+"CharacterPivot": "",
+"State": "",
+"StateCharacter": "",
+"StateCharacterHurt": "",
+"StateMaster": "",
+"StatePlayer": ""
+}
+
+[application]
+
+config/name="Hollow Carbon"
+config/icon="res://icon.png"
+
+[autoload]
+
+Global="*res://Objects/Scripts/Global.gd"
+
+[display]
+
+window/size/width=512
+window/size/height=300
+window/stretch/mode="2d"
+window/stretch/aspect="keep"
+
+[input]
+
+move_left={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":65,"unicode":0,"echo":false,"script":null)
+ ]
+}
+move_right={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":68,"unicode":0,"echo":false,"script":null)
+ ]
+}
+action_jump={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":32,"unicode":0,"echo":false,"script":null)
+ ]
+}
+action_dash={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":16777237,"unicode":0,"echo":false,"script":null)
+ ]
+}
+
+[physics]
+
+common/enable_pause_aware_picking=true
+
+[rendering]
+
+environment/default_environment="res://default_env.tres"
