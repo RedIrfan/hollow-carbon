@@ -34,6 +34,12 @@ func flip():
 		pivot.scale.x = direction_x
 
 
+func on_floor() -> bool:
+	if self.is_on_floor():
+		return true
+	return false
+
+
 func set_default_health(nhealth:int):
 	DEFAULT_HEALTH = nhealth
 	health = DEFAULT_HEALTH

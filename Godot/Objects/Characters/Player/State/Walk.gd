@@ -2,9 +2,11 @@ extends StatePlayer
 
 
 func physics_process(delta):
-	var dir_x = _get_direction()
-	
-	if dir_x != 0:
-		body.direction_x = dir_x
-	else:
+	if _direction_auto() == false:
 		fsm.enter_state("Idle")
+	
+	if _get_jump():
+		fsm.enter_state("jump")
+	
+	if _get_dash():
+		fsm.enter_state("dash")

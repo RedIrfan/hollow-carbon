@@ -1,6 +1,6 @@
 extends Node
 
-var GRAVITY : float = 9.8
+var GRAVITY : float = 150
 
 
 func stage_master():

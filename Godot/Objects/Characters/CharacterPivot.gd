@@ -18,6 +18,14 @@ func flash(mode:bool, color:Vector3=Vector3(1,1,0)):
 	if mode == true:
 		material.set_shader_param("color", color)
 		material.set_shader_param("color_progress", 1)
+	else:
+		material.set_shader_param("color_progress", 0)
+
+
+func flash_with_time(mode:bool, color:Vector3=Vector3(1,1,0)):
+	if mode == true:
+		material.set_shader_param("color", color)
+		material.set_shader_param("color_progress", 1)
 		
 		flash_state = 1
 		flash_timer.start(flash_duration)
