@@ -28,13 +28,14 @@ func _ready():
 func enter_state(state_name:String, msg={}):
 	state_name = state_name.to_lower()
 	if states.has(state_name):
-		if current_state:
-			current_state.exit()
-			current_state = null
-		current_state = states[state_name]
-		current_state.fsm = self
-		current_state.body = body
-		current_state.enter(msg)
+		if states[state_name].enter_condition(msg):
+			if current_state:
+				current_state.exit()
+				current_state = null
+			current_state = states[state_name]
+			current_state.fsm = self
+			current_state.body = body
+			current_state.enter(msg)
 	else:
 		printerr("STATE MASTER: " + self.body.name + " DOES NOT HAVE A " + state_name + " STATE! (enter_state)")
 

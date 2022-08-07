@@ -1,9 +1,8 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Objects/Characters/State/StateCharacterHurt.gd" type="Script" id=1]
 [ext_resource path="res://Objects/Scripts/StateMaster.gd" type="Script" id=2]
 [ext_resource path="res://Objects/Characters/Character.gd" type="Script" id=3]
-[ext_resource path="res://Assets/2D/Characters/Carbon.png" type="Texture" id=4]
 [ext_resource path="res://Objects/Characters/CharacterPivot.gd" type="Script" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -41,10 +40,6 @@ shape = SubResource( 1 )
 material = SubResource( 4 )
 position = Vector2( 0, -16 )
 script = ExtResource( 5 )
-
-[node name="Sprite" type="Sprite" parent="Pivot"]
-use_parent_material = true
-texture = ExtResource( 4 )
 
 [node name="FlashTimer" type="Timer" parent="Pivot"]
 

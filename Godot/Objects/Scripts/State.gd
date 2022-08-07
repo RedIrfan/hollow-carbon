@@ -9,6 +9,10 @@ func _ready():
 	add_to_group("State")
 
 
+func enter_condition(_msg={}) -> bool:
+	return true
+
+
 func enter(_msg={}):
 	pass
 
