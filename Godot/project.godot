@@ -20,6 +20,31 @@ _global_script_classes=[ {
 "path": "res://Objects/Characters/CharacterPivot.gd"
 }, {
 "base": "Node2D",
+"class": "Destroyable",
+"language": "GDScript",
+"path": "res://Objects/World/Destroyable/Destroyable.gd"
+}, {
+"base": "Node2D",
+"class": "Event",
+"language": "GDScript",
+"path": "res://Objects/Scripts/Events/Event.gd"
+}, {
+"base": "Area2D",
+"class": "EventMaster",
+"language": "GDScript",
+"path": "res://Objects/Scripts/Events/EventMaster.gd"
+}, {
+"base": "Area2D",
+"class": "Hitbox",
+"language": "GDScript",
+"path": "res://Objects/Scripts/Hitbox.gd"
+}, {
+"base": "Area2D",
+"class": "Hurtbox",
+"language": "GDScript",
+"path": "res://Objects/Scripts/Hurtbox.gd"
+}, {
+"base": "Node2D",
 "class": "StageMaster",
 "language": "GDScript",
 "path": "res://Scenes/StageMaster.gd"
@@ -57,6 +82,11 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "Character": "",
 "CharacterPivot": "",
+"Destroyable": "",
+"Event": "",
+"EventMaster": "",
+"Hitbox": "",
+"Hurtbox": "",
 "StageMaster": "",
 "State": "",
 "StateCharacter": "",
@@ -79,7 +109,6 @@ Global="*res://Objects/Scripts/Global.gd"
 
 window/size/width=240
 window/size/height=160
-window/size/fullscreen=true
 window/stretch/mode="viewport"
 window/stretch/aspect="keep"
 
@@ -140,6 +169,8 @@ action_attack={
 
 2d_physics/layer_1="World Collision"
 2d_physics/layer_2="CharacterCollision"
+2d_physics/layer_10="Hitbox"
+2d_physics/layer_11="Hurtbox"
 
 [physics]
 

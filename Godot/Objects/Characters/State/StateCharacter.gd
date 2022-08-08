@@ -3,6 +3,8 @@ extends State
 
 
 func _get_hurt() -> bool:
+	if body.attack_data != null:
+		return true
 	return false
 
 

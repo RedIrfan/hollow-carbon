@@ -8,6 +8,8 @@ export var animation_player_path : NodePath = ""
 var health : float = DEFAULT_HEALTH
 var speed : float = DEFAULT_SPEED
 
+var attack_data = null
+
 var direction_x : int = 0
 var velocity : Vector2 = Vector2.ZERO
 var gravity : float = Global.GRAVITY
@@ -44,6 +46,10 @@ func play_animation(animation_name:String):
 	if animation_player != null:
 		if animation_player is AnimatedSprite:
 			animation_player.play(animation_name)
+
+
+func hurt(nattack_data):
+	attack_data = nattack_data
 
 
 func on_floor() -> bool:

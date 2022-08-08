@@ -1,10 +1,13 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Objects/Characters/Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/2D/Tilemap/Rusty.png" type="Texture" id=2]
 [ext_resource path="res://Assets/2D/Tilemap/DarkWall.png" type="Texture" id=3]
 [ext_resource path="res://Scenes/StageMaster.gd" type="Script" id=4]
 [ext_resource path="res://Objects/GameCamera/GameCamera.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Objects/World/Destroyable/Destroyable.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Objects/Scripts/Events/EventMaster.gd" type="Script" id=7]
+[ext_resource path="res://Objects/Scripts/Events/Event.gd" type="Script" id=8]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 )
@@ -56,7 +59,7 @@ points = PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 )
 } ]
 1/z_index = 0
 
-[node name="Stage" type="Node2D"]
+[node name="StageMaster" type="Node2D"]
 script = ExtResource( 4 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
@@ -70,3 +73,12 @@ tile_data = PoolIntArray( -131069, 0, 0, -131068, 0, 0, -131067, 0, 0, -65533, 1
 
 [node name="GameCamera" parent="." instance=ExtResource( 5 )]
 bonus_position = Vector2( 0, -15 )
+
+[node name="Destroyable" parent="." instance=ExtResource( 6 )]
+position = Vector2( 44, 0 )
+
+[node name="EventMaster" type="Area2D" parent="."]
+script = ExtResource( 7 )
+
+[node name="Event" type="Node2D" parent="EventMaster"]
+script = ExtResource( 8 )
