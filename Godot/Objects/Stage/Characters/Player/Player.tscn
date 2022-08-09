@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://Objects/Stage/Characters/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Objects/Stage/Characters/Player/State/Idle.gd" type="Script" id=2]
@@ -13,30 +13,6 @@
 [ext_resource path="res://Objects/Scripts/CollisionBox/Hitbox.gd" type="Script" id=11]
 [ext_resource path="res://Objects/Scripts/CollisionBox/Hurtbox.gd" type="Script" id=12]
 
-[sub_resource type="AtlasTexture" id=19]
-atlas = ExtResource( 9 )
-region = Rect2( 64, 96, 64, 32 )
-
-[sub_resource type="AtlasTexture" id=20]
-atlas = ExtResource( 9 )
-region = Rect2( 128, 96, 64, 32 )
-
-[sub_resource type="AtlasTexture" id=21]
-atlas = ExtResource( 9 )
-region = Rect2( 192, 96, 64, 32 )
-
-[sub_resource type="AtlasTexture" id=16]
-atlas = ExtResource( 9 )
-region = Rect2( 64, 0, 64, 32 )
-
-[sub_resource type="AtlasTexture" id=17]
-atlas = ExtResource( 9 )
-region = Rect2( 128, 0, 64, 32 )
-
-[sub_resource type="AtlasTexture" id=18]
-atlas = ExtResource( 9 )
-region = Rect2( 192, 0, 64, 32 )
-
 [sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 9 )
 region = Rect2( 0, 32, 32, 32 )
@@ -49,25 +25,17 @@ region = Rect2( 32, 32, 32, 32 )
 atlas = ExtResource( 9 )
 region = Rect2( 64, 32, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=9]
-atlas = ExtResource( 9 )
-region = Rect2( 0, 192, 32, 32 )
-
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 9 )
 region = Rect2( 0, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=8]
+[sub_resource type="AtlasTexture" id=24]
 atlas = ExtResource( 9 )
-region = Rect2( 0, 128, 32, 32 )
+region = Rect2( 0, 64, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=13]
+[sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 9 )
-region = Rect2( 0, 32, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=14]
-atlas = ExtResource( 9 )
-region = Rect2( 0, 0, 32, 32 )
+region = Rect2( 0, 192, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 9 )
@@ -89,32 +57,78 @@ region = Rect2( 32, 160, 32, 32 )
 atlas = ExtResource( 9 )
 region = Rect2( 64, 160, 32, 32 )
 
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 9 )
+region = Rect2( 64, 0, 64, 32 )
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 9 )
+region = Rect2( 128, 0, 64, 32 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 9 )
+region = Rect2( 0, 128, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 9 )
+region = Rect2( 0, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 9 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=19]
+atlas = ExtResource( 9 )
+region = Rect2( 64, 96, 64, 32 )
+
+[sub_resource type="AtlasTexture" id=20]
+atlas = ExtResource( 9 )
+region = Rect2( 128, 96, 64, 32 )
+
+[sub_resource type="AtlasTexture" id=21]
+atlas = ExtResource( 9 )
+region = Rect2( 192, 96, 64, 32 )
+
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 9 )
+region = Rect2( 192, 0, 64, 32 )
+
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
-"frames": [ SubResource( 19 ), SubResource( 20 ), SubResource( 21 ) ],
-"loop": true,
-"name": "AirSlash",
-"speed": 12.0
-}, {
-"frames": [ SubResource( 16 ), SubResource( 17 ), SubResource( 18 ) ],
-"loop": true,
-"name": "Slash",
-"speed": 12.0
-}, {
 "frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ) ],
 "loop": true,
 "name": "Walk",
 "speed": 12.0
+}, {
+"frames": [ SubResource( 1 ) ],
+"loop": true,
+"name": "Idle",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 24 ) ],
+"loop": true,
+"name": "Hurt",
+"speed": 5.0
 }, {
 "frames": [ SubResource( 9 ) ],
 "loop": true,
 "name": "Dash",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 1 ) ],
+"frames": [ SubResource( 6 ), SubResource( 7 ) ],
 "loop": true,
-"name": "Idle",
-"speed": 5.0
+"name": "Fall",
+"speed": 12.0
+}, {
+"frames": [ SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 11 ) ],
+"loop": true,
+"name": "WallRide",
+"speed": 12.0
+}, {
+"frames": [ SubResource( 16 ), SubResource( 17 ) ],
+"loop": true,
+"name": "Slash",
+"speed": 12.0
 }, {
 "frames": [ SubResource( 8 ) ],
 "loop": true,
@@ -126,19 +140,24 @@ animations = [ {
 "name": "Land",
 "speed": 12.0
 }, {
-"frames": [ SubResource( 6 ), SubResource( 7 ) ],
+"frames": [ SubResource( 19 ), SubResource( 20 ) ],
 "loop": true,
-"name": "Fall",
+"name": "AirSlash",
 "speed": 12.0
 }, {
-"frames": [ SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 11 ) ],
+"frames": [ SubResource( 21 ) ],
 "loop": true,
-"name": "WallRide",
+"name": "AirSlashRecover",
+"speed": 12.0
+}, {
+"frames": [ SubResource( 18 ) ],
+"loop": true,
+"name": "SlashRecover",
 "speed": 12.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=22]
-extents = Vector2( 20, 5.5 )
+extents = Vector2( 19, 5.5 )
 
 [sub_resource type="RectangleShape2D" id=23]
 extents = Vector2( 6, 11.5 )
@@ -205,13 +224,11 @@ script = ExtResource( 8 )
 
 [node name="Slash" type="Node" parent="StateMaster" index="6"]
 script = ExtResource( 10 )
-animation_name = "Slash"
-damage = 2
-air_animation_name = "AirSlash"
-animation_offset = Vector2( 16, 0 )
 hitbox_path = NodePath("../../Pivot/Hitbox")
-startup_duration = 0.0
-active_duration = 0.001
+damage = 2
+animations_name = [ "startup_animation", "Slash", "SlashRecover" ]
+air_animations_name = [ "startup_animation", "AirSlash", "AirSlashRecover" ]
+animation_offset = Vector2( 16, 0 )
 
 [node name="Hurtbox" type="Area2D" parent="." index="3"]
 collision_layer = 1024

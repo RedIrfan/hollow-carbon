@@ -19,3 +19,5 @@ func physics_process(_delta):
 		fsm.enter_state("fall")
 	if _get_attack():
 		fsm.enter_state("Slash")
+	if _get_hurt():
+		fsm.enter_state("Hurt")

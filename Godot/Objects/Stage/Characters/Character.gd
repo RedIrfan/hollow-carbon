@@ -32,6 +32,8 @@ func _physics_process(delta):
 func move(delta):
 	var snap = Vector2.DOWN
 	
+	if velocity.y < 0:
+		snap = Vector2.ZERO
 #	if on_floor():
 #		snap = check_floor.get_collision_normal()
 		

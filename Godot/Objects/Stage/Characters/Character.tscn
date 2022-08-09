@@ -37,3 +37,4 @@ body_path = NodePath("..")
 script = ExtResource( 1 )
 
 [node name="HurtTimer" type="Timer" parent="StateMaster/Hurt"]
+one_shot = true

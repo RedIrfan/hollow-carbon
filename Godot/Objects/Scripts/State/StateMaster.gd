@@ -28,7 +28,7 @@ func _ready():
 func enter_state(state_name:String, msg={}):
 	state_name = state_name.to_lower()
 	if states.has(state_name):
-		if states[state_name].enter_condition(msg):
+		if states[state_name].enter_condition(body, msg):
 			if current_state:
 				current_state.exit()
 				current_state = null

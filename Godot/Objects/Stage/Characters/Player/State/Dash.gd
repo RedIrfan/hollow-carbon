@@ -8,7 +8,7 @@ onready var dash_timer : Timer = $DashTimer
 onready var cooldown_timer : Timer = $CooldownTimer
 
 
-func enter_condition(_msg={}) -> bool:
+func enter_condition(_nbody, _msg={}) -> bool:
 	if cooldown_timer.is_stopped():
 		return true
 	return false
