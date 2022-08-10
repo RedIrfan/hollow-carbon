@@ -19,6 +19,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Objects/Stage/Characters/CharacterPivot.gd"
 }, {
+"base": "Hitbox",
+"class": "DeathBox",
+"language": "GDScript",
+"path": "res://Objects/Scripts/CollisionBox/DeathBox.gd"
+}, {
 "base": "Node2D",
 "class": "Destroyable",
 "language": "GDScript",
@@ -53,6 +58,16 @@ _global_script_classes=[ {
 "class": "Hurtbox",
 "language": "GDScript",
 "path": "res://Objects/Scripts/CollisionBox/Hurtbox.gd"
+}, {
+"base": "Node2D",
+"class": "Item",
+"language": "GDScript",
+"path": "res://Objects/Stage/Items/Item.gd"
+}, {
+"base": "Item",
+"class": "ItemAddValuePlayer",
+"language": "GDScript",
+"path": "res://Objects/Stage/Items/BlueOrb/BlueOrb.gd"
 }, {
 "base": "Node2D",
 "class": "StageMaster",
@@ -108,10 +123,16 @@ _global_script_classes=[ {
 "class": "StatePlayer",
 "language": "GDScript",
 "path": "res://Objects/Stage/Characters/Player/State/StatePlayer.gd"
+}, {
+"base": "StateCharacterAttack",
+"class": "StatePlayerAttack",
+"language": "GDScript",
+"path": "res://Objects/Stage/Characters/Player/State/StatePlayerAttack.gd"
 } ]
 _global_script_class_icons={
 "Character": "",
 "CharacterPivot": "",
+"DeathBox": "",
 "Destroyable": "",
 "Effect": "",
 "Enemy": "",
@@ -119,6 +140,8 @@ _global_script_class_icons={
 "EventMaster": "",
 "Hitbox": "",
 "Hurtbox": "",
+"Item": "",
+"ItemAddValuePlayer": "",
 "StageMaster": "",
 "State": "",
 "StateCharacter": "",
@@ -129,7 +152,8 @@ _global_script_class_icons={
 "StateMaster": "",
 "StateMetal": "",
 "StateMetalMaster": "",
-"StatePlayer": ""
+"StatePlayer": "",
+"StatePlayerAttack": ""
 }
 
 [application]
@@ -219,6 +243,7 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
+quality/driver/driver_name="GLES2"
 quality/driver/fallback_to_gles2=true
 2d/snapping/use_gpu_pixel_snap=true
 environment/default_environment="res://default_env.tres"

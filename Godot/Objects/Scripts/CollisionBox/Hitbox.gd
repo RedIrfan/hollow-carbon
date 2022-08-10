@@ -4,6 +4,7 @@ extends Area2D
 
 signal hit(area)
 
+export var exception_group : String = ""
 export var body_path : NodePath = ""
 
 var body : Node = null
@@ -48,7 +49,7 @@ func get_attack_data():
 
 func _on_area_entered(area):
 	if area.is_in_group("Hurtbox"):
-		if area.body != body:
+		if area.body != body and area.body.is_in_group(exception_group) == false:
 			areas.append(area)
 			if attack_data["damage"] > 0:
 				area.hurt(get_attack_data())

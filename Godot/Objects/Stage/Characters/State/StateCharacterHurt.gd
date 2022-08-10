@@ -8,6 +8,7 @@ export var skips_stun : bool = false
 var hurt_jump_velocity : float = 45
 var hurt_speed : float = 45
 var skipping : bool = false
+var dead : bool = false
 
 onready var hurt_timer : Timer = $HurtTimer
 
@@ -18,6 +19,10 @@ func _ready():
 
 func enter_condition(nbody, msg={}):
 	body = nbody
+	
+	if process_health():
+		return true
+	
 	if skips_stun == true:
 		skip_stun()
 		
@@ -33,16 +38,19 @@ func enter_condition(nbody, msg={}):
 func enter(msg={}):
 	skipping = false
 	
+	if dead:
+		fsm.enter_state("Dead")
+	
 	body.speed = hurt_speed
 	body.velocity.y = -hurt_jump_velocity
 	
-	var attacker_pos = Vector2(body.attack_data["hitbox_position"].x, body.global_position.y)
-	body.direction_x = body.global_position.direction_to(attacker_pos).x * -1
+	var attacker_pos = body.attack_data["hitbox_position"]
+	body.direction_x = 1 if attacker_pos.x < body.global_position.x else -1
 	
 	body.pivot.flash(true)
 	body.play_animation(hurt_animation)
 	
-	hurt_timer.start(0.01)
+	hurt_timer.start(0.2)
 	
 	body.attack_data = null
 
@@ -56,6 +64,15 @@ func exit():
 func physics_process(_delta):
 	if body.on_floor() and hurt_timer.is_stopped():
 		fsm.enter_state(fsm.initial_state.name)
+
+
+func process_health():
+	body.health -= body.attack_data["damage"]
+	
+	if body.health <= 0:
+		dead = true
+		return true
+	return false
 
 
 func skip_stun():

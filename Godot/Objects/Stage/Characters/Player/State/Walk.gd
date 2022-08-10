@@ -17,4 +17,5 @@ func physics_process(delta):
 		fsm.enter_state("dash")
 	
 	if _get_attack():
+		body.direction_x = 0
 		fsm.enter_state("Slash")

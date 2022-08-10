@@ -56,9 +56,8 @@ func enter(msg={}):
 			animations = air_animations_name
 	
 	if ground == true:
-		body.direction_x = 0
 		animations = animations_name
-	
+		
 	if animations[0] != "startup_animation":
 		_change_direction(states_direction[0])
 		body.play_animation(animations[0])

@@ -1,6 +1,8 @@
 class_name Character
 extends KinematicBody2D
 
+signal dead()
+
 export var DEFAULT_HEALTH : int = 100 setget set_default_health
 export var DEFAULT_SPEED : int = 50 setget set_default_speed
 export var animation_player_path : NodePath = ""

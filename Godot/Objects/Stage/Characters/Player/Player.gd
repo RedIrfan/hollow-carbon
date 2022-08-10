@@ -1,6 +1,8 @@
 extends Character
 
 
+var metal : Node2D
+
 onready var check_wall : RayCast2D = $Pivot/CheckWall
 
 

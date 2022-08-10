@@ -15,8 +15,12 @@ onready var state_master : StateMaster = $StateMetalMaster
 func _ready():
 	player = Global.stage_master().player
 	
+	player.metal = self
+	
 	ball_position = pivot.position
 	pivot.position = Vector2.ZERO
+	
+	get_tree().call_group("Metal Eyes", "blink")
 
 
 func _physics_process(delta):
