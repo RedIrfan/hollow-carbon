@@ -2,6 +2,8 @@ tool
 class_name Hitbox
 extends Area2D
 
+signal hit(area)
+
 export var body_path : NodePath = ""
 
 var body : Node = null
@@ -34,6 +36,7 @@ func set_damage(ndamage:int):
 	if ndamage > 0:
 		for area in areas:
 			area.hurt(get_attack_data())
+			emit_signal("hit", area)
 
 
 func get_attack_data():
@@ -49,6 +52,7 @@ func _on_area_entered(area):
 			areas.append(area)
 			if attack_data["damage"] > 0:
 				area.hurt(get_attack_data())
+				emit_signal("hit", area)
 
 
 func _on_area_exited(area):

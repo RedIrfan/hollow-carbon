@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Objects/Scripts/CollisionBox/Hitbox.gd" type="Script" id=1]
+[ext_resource path="res://Objects/Stage/Projectile/Projectile.gd" type="Script" id=2]
+[ext_resource path="res://Assets/2D/Effects/Explosion.png" type="Texture" id=3]
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ SubResource( 2 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+[node name="Projectile" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="KillTimer" type="Timer" parent="."]
+
+[node name="Pivot" type="Node2D" parent="."]
+
+[node name="Sprite" type="AnimatedSprite" parent="Pivot"]
+frames = SubResource( 3 )
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 512
+collision_mask = 1025
+script = ExtResource( 1 )
+body_path = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource( 1 )
