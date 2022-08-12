@@ -12,18 +12,25 @@ func _ready():
 	
 	start_position = get_player().global_position
 	player.connect("dead", self, "_on_player_dead")
+	
+	current_saved_position = start_position
+	
+	get_tree().call_group("Seter", "setup")
 
 
 func restart():
+	player.global_position = current_saved_position
 	get_tree().call_group("Reseter", "reset")
+	get_tree().call_group("Seter", "setup")
 
 
 func full_restart():
+	current_saved_position = start_position
 	restart()
 
 
 func _on_player_dead():
-	pass
+	restart()
 
 
 func set_player(nplayer):

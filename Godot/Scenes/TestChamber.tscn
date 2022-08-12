@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://Objects/Stage/Characters/Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/2D/Tilemap/Ground.png" type="Texture" id=2]
@@ -7,10 +7,17 @@
 [ext_resource path="res://Objects/Stage/GameCamera/GameCamera.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Objects/Stage/Destroyable/Destroyable.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Objects/Scripts/Events/EventMaster.gd" type="Script" id=7]
-[ext_resource path="res://Objects/Scripts/Events/Event.gd" type="Script" id=8]
+[ext_resource path="res://Objects/Scripts/Events/EventCheckpoint.gd" type="Script" id=8]
 [ext_resource path="res://Objects/Stage/Characters/Metal/Metal.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/Gui/Hud/Hud.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Objects/Scripts/CollisionBox/DeathBox.gd" type="Script" id=11]
+[ext_resource path="res://Objects/Stage/Characters/Enemy/Trigger/Trigger.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Objects/Stage/Items/BlueOrb/BlueOrb.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Assets/2D/Background/PurpleGrass1.png" type="Texture" id=14]
+[ext_resource path="res://Assets/2D/Background/PurpleGrass2.png" type="Texture" id=15]
+[ext_resource path="res://Assets/2D/Background/PurpleGrass3.png" type="Texture" id=16]
+[ext_resource path="res://Assets/2D/Background/PurpleGrass4.png" type="Texture" id=17]
+[ext_resource path="res://Assets/2D/Background/PurpleGrass5.png" type="Texture" id=18]
 
 [sub_resource type="ConvexPolygonShape2D" id=5]
 points = PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 )
@@ -166,6 +173,65 @@ extents = Vector2( 42, 10 )
 [node name="StageMaster" type="Node2D"]
 script = ExtResource( 4 )
 
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+scroll_limit_begin = Vector2( 0, -160 )
+scroll_limit_end = Vector2( 0, 80 )
+
+[node name="ParallaxLayer5" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0, 0 )
+motion_mirroring = Vector2( 480, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer5"]
+texture = ExtResource( 18 )
+
+[node name="Sprite2" type="Sprite" parent="ParallaxBackground/ParallaxLayer5"]
+position = Vector2( 240, 0 )
+texture = ExtResource( 18 )
+
+[node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.2, 0 )
+motion_mirroring = Vector2( 480, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer4"]
+texture = ExtResource( 17 )
+
+[node name="Sprite2" type="Sprite" parent="ParallaxBackground/ParallaxLayer4"]
+position = Vector2( 240, 0 )
+texture = ExtResource( 17 )
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.3, 0.1 )
+motion_mirroring = Vector2( 480, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer3"]
+texture = ExtResource( 16 )
+
+[node name="Sprite2" type="Sprite" parent="ParallaxBackground/ParallaxLayer3"]
+position = Vector2( 240, 0 )
+texture = ExtResource( 16 )
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.4, 0.2 )
+motion_mirroring = Vector2( 480, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer2"]
+texture = ExtResource( 15 )
+
+[node name="Sprite2" type="Sprite" parent="ParallaxBackground/ParallaxLayer2"]
+position = Vector2( 240, 0 )
+texture = ExtResource( 15 )
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.5, 0.3 )
+motion_mirroring = Vector2( 480, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+texture = ExtResource( 14 )
+
+[node name="Sprite2" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2( 240, 0 )
+texture = ExtResource( 14 )
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Control" parent="CanvasLayer" instance=ExtResource( 10 )]
@@ -187,15 +253,16 @@ bonus_position = Vector2( 0, -15 )
 
 [node name="Destroyable" parent="." instance=ExtResource( 6 )]
 position = Vector2( 44, 0 )
+dropped_item = ExtResource( 13 )
 
 [node name="EventMaster" type="Area2D" parent="."]
+position = Vector2( 86, -10 )
 script = ExtResource( 7 )
 
-[node name="Event" type="Node2D" parent="EventMaster"]
+[node name="EventCheckpoint" type="Node2D" parent="EventMaster"]
 script = ExtResource( 8 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EventMaster"]
-position = Vector2( 79, -12 )
 shape = SubResource( 4 )
 
 [node name="Enemy" parent="." instance=ExtResource( 3 )]
@@ -210,3 +277,6 @@ body_path = NodePath(".")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DeathBox"]
 position = Vector2( -99, 43 )
 shape = SubResource( 11 )
+
+[node name="Trigger" parent="." instance=ExtResource( 12 )]
+position = Vector2( 127, -65 )
