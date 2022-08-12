@@ -3,5 +3,5 @@ extends StateMaster
 
 
 func attack():
-	if current_state and body.energy > 0:
+	if current_state:
 		current_state.attack()

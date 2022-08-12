@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Objects/Stage/Characters/Metal/Metal.gd" type="Script" id=1]
 [ext_resource path="res://Assets/2D/Characters/Metal.png" type="Texture" id=2]
 [ext_resource path="res://Objects/Stage/Characters/Metal/State/StateMetalMaster.gd" type="Script" id=3]
 [ext_resource path="res://Objects/Stage/Characters/Metal/State/EnergyShooter.gd" type="Script" id=4]
 [ext_resource path="res://Objects/Stage/Characters/Metal/MetalEyeSprite.gd" type="Script" id=5]
+[ext_resource path="res://Objects/Stage/Characters/Metal/CheckPower.gd" type="Script" id=8]
 
 [sub_resource type="AtlasTexture" id=11]
 atlas = ExtResource( 2 )
@@ -47,7 +48,6 @@ animations = [ {
 z_index = 2
 z_as_relative = false
 script = ExtResource( 1 )
-speed = 7
 
 [node name="Pivot" type="Node2D" parent="."]
 position = Vector2( -10, -16 )
@@ -59,8 +59,11 @@ script = ExtResource( 5 )
 
 [node name="StateMetalMaster" type="Node" parent="."]
 script = ExtResource( 3 )
-initial_state_path = NodePath("EnergyShooter")
+initial_state_path = NodePath("Metal")
 body_path = NodePath("..")
 
-[node name="EnergyShooter" type="Node" parent="StateMetalMaster"]
+[node name="CheckPower" type="Node" parent="StateMetalMaster"]
+script = ExtResource( 8 )
+
+[node name="Metal" type="Node" parent="StateMetalMaster"]
 script = ExtResource( 4 )

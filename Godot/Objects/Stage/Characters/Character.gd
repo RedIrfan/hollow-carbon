@@ -6,6 +6,7 @@ signal dead()
 export var DEFAULT_HEALTH : int = 100 setget set_default_health
 export var DEFAULT_SPEED : int = 50 setget set_default_speed
 export var animation_player_path : NodePath = ""
+export(String, "Left", "Right") var facing_direction : String = "Right"
 
 var health : float = DEFAULT_HEALTH
 var speed : float = DEFAULT_SPEED
@@ -26,10 +27,13 @@ onready var fsm : StateMaster = $StateMaster
 func _ready():
 	add_to_group("Character")
 	add_to_group("Reseter")
+	
+	pivot.scale.x = -1 if facing_direction == "Left" else 1
 
 
 func reset():
 	attack_data = null
+	pivot.scale.x = -1 if facing_direction == "Left" else 1
 	health = DEFAULT_HEALTH
 	velocity = Vector2.ZERO
 	direction_x = 0
@@ -95,8 +99,9 @@ func get_animation_player():
 
 
 func set_default_health(nhealth:int):
+	var value_difference = DEFAULT_HEALTH - health
 	DEFAULT_HEALTH = nhealth
-	health = DEFAULT_HEALTH
+	health = abs(DEFAULT_HEALTH - value_difference)
 
 
 func set_default_speed(nspeed:int):

@@ -1,6 +1,11 @@
 extends StatePlayer
 
+export var jump_delay_duration : float = 0.1
+
 var up_velocity : float = 50
+var jumped : bool = false
+
+onready var jump_delay_timer : Timer = $JumpDelayTimer
 
 
 func enter(msg={}):
@@ -12,16 +17,28 @@ func enter(msg={}):
 
 func exit():
 	body.animation_player.offset.x = 0
+	body.gravity = Global.GRAVITY
 
 
 func physics_process(delta):
-	body.velocity.y = 3
-	
-	_direction_auto()
-	
-	if _get_wallride() == false:
-		fsm.enter_state("fall")
-	if _get_jump():
-		fsm.enter_state("jump", {"wall_direction" : body.pivot.scale.x})
-	if body.on_floor():
-		fsm.enter_state("Idle")
+	if jump_delay_timer.is_stopped():
+		if jumped:
+			fsm.enter_state("jump", {"wall_direction" : body.pivot.scale.x})
+			jumped = false
+			
+			return
+		
+		body.velocity.y = 3
+		
+		_direction_auto()
+		
+		if _get_wallride() == false:
+			fsm.enter_state("fall")
+		if _get_jump():
+			jumped = true
+			jump_delay_timer.start(jump_delay_duration)
+		if body.on_floor():
+			fsm.enter_state("Idle")
+	else:
+		body.velocity.y = 0
+		body.gravity = 0
