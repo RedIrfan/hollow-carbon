@@ -16,3 +16,5 @@ func physics_process(delta):
 		fsm.enter_state("wallride")
 	if _get_attack():
 		fsm.enter_state("Slash")
+	if _get_hurt():
+		fsm.enter_state("Hurt")

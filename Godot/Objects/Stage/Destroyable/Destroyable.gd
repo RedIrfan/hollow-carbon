@@ -4,6 +4,7 @@ extends Node2D
 var explosion_effect : PackedScene = preload("res://Objects/Stage/Effects/Explosion/Explosion.tscn")
 
 export var DEFAULT_HEALTH : int = 1 setget set_default_health
+export var dropped_item : PackedScene
 
 var health : float = DEFAULT_HEALTH
 
@@ -24,6 +25,10 @@ func hurt(hurt_data):
 func dead():
 	var ex = explosion_effect.instance()
 	ex.spawn(self, explosion_position.global_position)
+	
+	if dropped_item != null:
+		var item : Item = dropped_item.instance()
+		item.spawn(explosion_position.global_position)
 	
 	_destroy()
 

@@ -9,7 +9,7 @@ func _get_direction_to_player() -> Vector2:
 	return body_pos.direction_to(player_pos)
 
 
-func _get_distance_to_player() -> Vector2:
+func _get_distance_to_player() -> float:
 	if body.player:
 		return body.player.global_position.distance_to(body.global_position)
-	return Vector2.ZERO
+	return 0.0

@@ -1,7 +1,7 @@
 extends Node2D
 
 export var MAXIMUM_ENERGY : int = 100
-export var speed : int = 10
+export var speed : int = 5
 
 var energy : float = 0 setget set_energy
 
@@ -13,6 +13,7 @@ onready var state_master : StateMaster = $StateMetalMaster
 
 
 func _ready():
+	add_to_group("Reseter")
 	player = Global.stage_master().player
 	
 	player.metal = self
@@ -21,6 +22,10 @@ func _ready():
 	pivot.position = Vector2.ZERO
 	
 	get_tree().call_group("Metal Eyes", "blink")
+
+
+func reset():
+	energy = 0
 
 
 func _physics_process(delta):

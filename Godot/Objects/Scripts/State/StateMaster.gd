@@ -25,6 +25,10 @@ func _ready():
 		enter_state(initial_state.name)
 
 
+func reset():
+	enter_state(initial_state.name)
+
+
 func enter_state(state_name:String, msg={}):
 	state_name = state_name.to_lower()
 	if states.has(state_name):

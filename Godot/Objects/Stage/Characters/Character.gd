@@ -20,10 +20,21 @@ var animation_player : Node
 
 onready var pivot : Node2D = $Pivot
 onready var check_floor : RayCast2D = $Pivot/CheckFloor
+onready var fsm : StateMaster = $StateMaster
 
 
 func _ready():
 	add_to_group("Character")
+	add_to_group("Reseter")
+
+
+func reset():
+	attack_data = null
+	health = DEFAULT_HEALTH
+	velocity = Vector2.ZERO
+	direction_x = 0
+	fsm.reset()
+	pivot.flash(false)
 
 
 func _physics_process(delta):
@@ -32,9 +43,9 @@ func _physics_process(delta):
 
 
 func move(delta):
-	var snap = Vector2.DOWN
+	var snap = Vector2.DOWN * 2.5
 	
-	if velocity.y < 0:
+	if velocity.y < 1:
 		snap = Vector2.ZERO
 #	if on_floor():
 #		snap = check_floor.get_collision_normal()

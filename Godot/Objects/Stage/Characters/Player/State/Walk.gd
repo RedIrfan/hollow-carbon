@@ -1,6 +1,10 @@
 extends StatePlayer
 
 
+func enter(msg={}):
+	body.speed = body.DEFAULT_SPEED
+
+
 func physics_process(delta):
 	body.play_animation("Walk")
 	

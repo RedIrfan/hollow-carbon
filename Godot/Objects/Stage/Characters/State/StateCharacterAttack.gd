@@ -38,7 +38,8 @@ var hitbox : Node
 
 
 func _ready():
-	hitbox = get_node(hitbox_path)
+	if hitbox_path:
+		hitbox = get_node(hitbox_path)
 
 
 func enter(msg={}):
@@ -70,7 +71,7 @@ func enter(msg={}):
 func exit():
 	body.speed = body.DEFAULT_SPEED
 	body.direction_x = 0
-	hitbox.set_damage(0)
+	_set_damage(0)
 	body.animation_player.offset = Vector2.ZERO
 	
 	body.disconnect_from_animation(self, "_on_animation_finished")
@@ -86,7 +87,12 @@ func activate_damage():
 	body.play_animation(animations[1])
 	
 	state = states.ACTIVE
-	hitbox.set_damage(damage)
+	_set_damage(damage)
+
+
+func _set_damage(ndamage:int):
+	if hitbox_path:
+		hitbox.set_damage(ndamage)
 
 
 func _on_animation_finished():
@@ -98,7 +104,7 @@ func _on_animation_finished():
 			body.play_animation(animations[2])
 			
 			state = states.RECOVERY
-			hitbox.set_damage(0)
+			_set_damage(0)
 		states.RECOVERY:
 			_end_state()
 

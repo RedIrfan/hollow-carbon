@@ -40,6 +40,7 @@ func enter(msg={}):
 	
 	if dead:
 		fsm.enter_state("Dead")
+		return
 	
 	body.speed = hurt_speed
 	body.velocity.y = -hurt_jump_velocity

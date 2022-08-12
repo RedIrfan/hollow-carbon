@@ -1,6 +1,6 @@
 extends StatePlayer
 
-var jump_force : float = 200
+var jump_force : float = 1000
 var minimal_jump_duration : float = 0.05
 
 var wall_jump : bool = false
@@ -12,8 +12,8 @@ onready var minimaljump_timer : Timer = $MinimalJumpTimer
 
 
 func enter(msg={}):
-	body.gravity = Global.GRAVITY * 2
-	body.velocity.y -= jump_force
+	body.gravity = Global.GRAVITY * 1.5
+	body.velocity.y = -jump_force
 	
 	if msg.has("wall_direction"):
 		wall_jump = true
@@ -48,3 +48,5 @@ func physics_process(delta):
 	if _get_attack():
 		body.velocity.y = 0
 		fsm.enter_state("Slash", {"air" : true})
+	if _get_hurt():
+		fsm.enter_state("Hurt")
