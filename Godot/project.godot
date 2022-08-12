@@ -59,6 +59,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Objects/Scripts/Events/EventMaster.gd"
 }, {
+"base": "Camera2D",
+"class": "GameCamera",
+"language": "GDScript",
+"path": "res://Objects/Scripts/GameCamera.gd"
+}, {
 "base": "Area2D",
 "class": "Hitbox",
 "language": "GDScript",
@@ -79,6 +84,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Objects/Stage/Items/BlueOrb/BlueOrb.gd"
 }, {
+"base": "StatePlayer",
+"class": "PowerStatePlayer",
+"language": "GDScript",
+"path": "res://Objects/Stage/Characters/Player/State/PowerState/PowerState.gd"
+}, {
 "base": "Node2D",
 "class": "Projectile",
 "language": "GDScript",
@@ -87,7 +97,7 @@ _global_script_classes=[ {
 "base": "Node2D",
 "class": "StageMaster",
 "language": "GDScript",
-"path": "res://Scenes/StageMaster.gd"
+"path": "res://Scenes/Stage/StageMaster.gd"
 }, {
 "base": "Node",
 "class": "State",
@@ -165,10 +175,12 @@ _global_script_class_icons={
 "Event": "",
 "EventCheckpoint": "",
 "EventMaster": "",
+"GameCamera": "",
 "Hitbox": "",
 "Hurtbox": "",
 "Item": "",
 "ItemAddValuePlayer": "",
+"PowerStatePlayer": "",
 "Projectile": "",
 "StageMaster": "",
 "State": "",
