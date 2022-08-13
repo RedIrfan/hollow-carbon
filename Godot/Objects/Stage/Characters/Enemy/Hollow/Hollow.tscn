@@ -37,30 +37,6 @@ region = Rect2( 32, 96, 32, 32 )
 atlas = ExtResource( 2 )
 region = Rect2( 64, 96, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=6]
-atlas = ExtResource( 2 )
-region = Rect2( 64, 64, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=7]
-atlas = ExtResource( 2 )
-region = Rect2( 0, 64, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 2 )
-region = Rect2( 32, 64, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=9]
-atlas = ExtResource( 2 )
-region = Rect2( 64, 32, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=3]
-atlas = ExtResource( 2 )
-region = Rect2( 0, 32, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=4]
-atlas = ExtResource( 2 )
-region = Rect2( 32, 32, 32, 32 )
-
 [sub_resource type="AtlasTexture" id=21]
 atlas = ExtResource( 2 )
 region = Rect2( 96, 96, 32, 32 )
@@ -97,22 +73,36 @@ region = Rect2( 32, 64, 32, 32 )
 atlas = ExtResource( 2 )
 region = Rect2( 64, 64, 32, 32 )
 
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 2 )
+region = Rect2( 64, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 2 )
+region = Rect2( 32, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 2 )
+region = Rect2( 64, 64, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 64, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 2 )
+region = Rect2( 32, 64, 32, 32 )
+
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
 "frames": [ SubResource( 17 ), SubResource( 18 ) ],
 "loop": false,
 "name": "Attack",
 "speed": 12.0
-}, {
-"frames": [ SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 8 ) ],
-"loop": false,
-"name": "Walk2",
-"speed": 6.0
-}, {
-"frames": [ SubResource( 9 ), SubResource( 3 ), SubResource( 4 ), SubResource( 4 ) ],
-"loop": false,
-"name": "Walk1",
-"speed": 6.0
 }, {
 "frames": [ SubResource( 21 ) ],
 "loop": true,
@@ -133,6 +123,16 @@ animations = [ {
 "loop": true,
 "name": "Walk",
 "speed": 6.0
+}, {
+"frames": [ SubResource( 9 ), SubResource( 3 ), SubResource( 4 ), SubResource( 4 ) ],
+"loop": false,
+"name": "Walk1",
+"speed": 6.0
+}, {
+"frames": [ SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 8 ) ],
+"loop": false,
+"name": "Walk2",
+"speed": 6.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=22]
@@ -148,9 +148,6 @@ animation_player_path = NodePath("Pivot/AnimatedSprite")
 
 [node name="Pivot" parent="." index="1"]
 material = SubResource( 24 )
-
-[node name="CheckFloor" parent="Pivot" index="1"]
-cast_to = Vector2( 0, 15 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Pivot" index="2"]
 use_parent_material = true
@@ -169,11 +166,17 @@ body_path = NodePath("../..")
 position = Vector2( 5.5, 3 )
 shape = SubResource( 22 )
 
+[node name="CheckFront" type="RayCast2D" parent="Pivot" index="4"]
+position = Vector2( 14, 12 )
+enabled = true
+cast_to = Vector2( 0, 15 )
+
 [node name="StateMaster" parent="." index="2"]
 initial_state_path = NodePath("Idle")
 
 [node name="Idle" type="Node" parent="StateMaster" index="0"]
 script = ExtResource( 3 )
+look_to_player = false
 attack_distance = 30.0
 
 [node name="ActionTimer" type="Timer" parent="StateMaster/Idle" index="0"]
@@ -181,7 +184,11 @@ one_shot = true
 
 [node name="Walk" type="Node" parent="StateMaster" index="1"]
 script = ExtResource( 4 )
+front_raycast_path = NodePath("../../Pivot/CheckFront")
 idle_distance = 30.0
+
+[node name="ChangeDirectionTimer" type="Timer" parent="StateMaster/Walk" index="0"]
+one_shot = true
 
 [node name="Attack" type="Node" parent="StateMaster" index="2"]
 script = ExtResource( 6 )

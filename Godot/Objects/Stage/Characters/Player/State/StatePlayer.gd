@@ -2,6 +2,10 @@ class_name StatePlayer
 extends StateCharacter
 
 
+func _get_up() -> bool:
+	return Input.is_action_pressed("action_up")
+
+
 func _get_direction() -> int:
 	if Input.is_action_pressed("move_right") and Input.is_action_pressed("move_left"):
 		return 0

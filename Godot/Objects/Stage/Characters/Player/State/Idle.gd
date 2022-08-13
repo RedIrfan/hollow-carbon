@@ -11,6 +11,11 @@ func enter(msg={}):
 
 
 func physics_process(_delta):
+	if _get_up():
+		body.play_animation("IdleUp")
+	else:
+		body.play_animation("Idle")
+	
 	if _get_direction() != 0:
 		fsm.enter_state("walk")
 	if _get_jump():
@@ -18,6 +23,6 @@ func physics_process(_delta):
 	if _get_fall():
 		fsm.enter_state("fall")
 	if _get_attack():
-		fsm.enter_state("Slash")
+		fsm.enter_state("Attack")
 	if _get_hurt():
 		fsm.enter_state("Hurt")

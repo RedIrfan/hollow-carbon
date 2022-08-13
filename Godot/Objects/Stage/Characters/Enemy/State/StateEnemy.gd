@@ -13,3 +13,9 @@ func _get_distance_to_player() -> float:
 	if body.player:
 		return body.player.global_position.distance_to(body.global_position)
 	return 0.0
+
+
+func _get_raw_distance_to_player() -> Vector2:
+	if body.player:
+		return body.player.global_position - body.global_position
+	return Vector2.ZERO

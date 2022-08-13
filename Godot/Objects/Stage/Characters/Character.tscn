@@ -28,7 +28,7 @@ script = ExtResource( 5 )
 [node name="CheckFloor" type="RayCast2D" parent="Pivot"]
 position = Vector2( 0, 7 )
 enabled = true
-cast_to = Vector2( 0, 12 )
+cast_to = Vector2( 0, 16 )
 
 [node name="StateMaster" type="Node" parent="."]
 script = ExtResource( 2 )

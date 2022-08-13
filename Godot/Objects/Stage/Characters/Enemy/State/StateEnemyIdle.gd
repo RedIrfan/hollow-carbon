@@ -2,6 +2,7 @@ class_name StateEnemyIdle
 extends StateEnemy
 
 export var action_duration : float = 0.5
+export var look_to_player : bool = true
 
 var action_timer : Timer
 
@@ -15,7 +16,7 @@ func _ready():
 
 
 func enter(_msg={}):
-	if body.pivot:
+	if body.pivot and look_to_player:
 		body.pivot.scale.x = _get_direction_to_player().x
 	
 	body.play_animation("Idle")
