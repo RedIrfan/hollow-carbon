@@ -11,6 +11,9 @@ func physics_process(delta):
 	if _direction_auto() == false:
 		fsm.enter_state("Idle")
 	
+	if _get_hurt():
+		fsm.enter_state("Hurt")
+	
 	if _get_jump():
 		fsm.enter_state("jump")
 	

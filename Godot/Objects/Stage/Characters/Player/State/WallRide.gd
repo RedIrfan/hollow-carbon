@@ -39,6 +39,8 @@ func physics_process(delta):
 			jump_delay_timer.start(jump_delay_duration)
 		if body.on_floor():
 			fsm.enter_state("Idle")
+		if _get_hurt():
+			fsm.enter_state("Hurt")
 	else:
 		body.velocity.y = 0
 		body.gravity = 0

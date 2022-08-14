@@ -38,3 +38,6 @@ func exit():
 func physics_process(delta):
 	if dash_timer.is_stopped():
 		fsm.enter_state("idle")
+	
+	if _get_hurt():
+		body.attack_data = null

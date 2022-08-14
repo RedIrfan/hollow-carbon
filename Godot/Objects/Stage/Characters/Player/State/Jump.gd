@@ -1,6 +1,6 @@
 extends StatePlayer
 
-var jump_force : float = 1000
+var jump_force : float = 1100
 var minimal_jump_duration : float = 0.05
 
 var wall_jump : bool = false
