@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Enemy",
+"class": "Boss",
+"language": "GDScript",
+"path": "res://Objects/Stage/Characters/Enemy/Boss/Boss.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "Character",
 "language": "GDScript",
@@ -50,24 +55,54 @@ _global_script_classes=[ {
 "path": "res://Objects/Scripts/Events/Event.gd"
 }, {
 "base": "Event",
+"class": "EventBoss",
+"language": "GDScript",
+"path": "res://Objects/Scripts/Events/EventBoss.gd"
+}, {
+"base": "Event",
 "class": "EventCameraLimit",
 "language": "GDScript",
 "path": "res://Objects/Scripts/Events/EventCameraLimit.gd"
+}, {
+"base": "Event",
+"class": "EventCameraPan",
+"language": "GDScript",
+"path": "res://Objects/Scripts/Events/EventCameraPan.gd"
 }, {
 "base": "Event",
 "class": "EventCheckpoint",
 "language": "GDScript",
 "path": "res://Objects/Scripts/Events/EventCheckpoint.gd"
 }, {
+"base": "Event",
+"class": "EventDialogue",
+"language": "GDScript",
+"path": "res://Objects/Scripts/Events/EventDialogue.gd"
+}, {
+"base": "Event",
+"class": "EventHollowRootsWall",
+"language": "GDScript",
+"path": "res://Objects/Scripts/Events/EventHollowRootsWall.gd"
+}, {
 "base": "Area2D",
 "class": "EventMaster",
 "language": "GDScript",
 "path": "res://Objects/Scripts/Events/EventMaster.gd"
 }, {
+"base": "Event",
+"class": "EventReady",
+"language": "GDScript",
+"path": "res://Objects/Scripts/Events/EventReady.gd"
+}, {
 "base": "Camera2D",
 "class": "GameCamera",
 "language": "GDScript",
 "path": "res://Objects/Scripts/GameCamera.gd"
+}, {
+"base": "Control",
+"class": "GuiChild",
+"language": "GDScript",
+"path": "res://Scenes/Gui/GuiChild.gd"
 }, {
 "base": "Area2D",
 "class": "Hitbox",
@@ -134,10 +169,20 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Objects/Stage/Characters/Enemy/State/StateEnemyAttack.gd"
 }, {
+"base": "StateEnemyAttack",
+"class": "StateEnemyAttackPound",
+"language": "GDScript",
+"path": "res://Objects/Stage/Characters/Enemy/State/StateEnemyAttackPound.gd"
+}, {
 "base": "StateEnemy",
 "class": "StateEnemyIdle",
 "language": "GDScript",
 "path": "res://Objects/Stage/Characters/Enemy/State/StateEnemyIdle.gd"
+}, {
+"base": "StateEnemy",
+"class": "StateEnemyJump",
+"language": "GDScript",
+"path": "res://Objects/Stage/Characters/Enemy/State/StateEnemyJump.gd"
 }, {
 "base": "StateEnemyAttack",
 "class": "StateEnemyShoot",
@@ -170,6 +215,7 @@ _global_script_classes=[ {
 "path": "res://Objects/Stage/Characters/Player/State/StatePlayerAttack.gd"
 } ]
 _global_script_class_icons={
+"Boss": "",
 "Character": "",
 "CharacterPivot": "",
 "DeathBox": "",
@@ -178,10 +224,16 @@ _global_script_class_icons={
 "Enemy": "",
 "EnemySpawner": "",
 "Event": "",
+"EventBoss": "",
 "EventCameraLimit": "",
+"EventCameraPan": "",
 "EventCheckpoint": "",
+"EventDialogue": "",
+"EventHollowRootsWall": "",
 "EventMaster": "",
+"EventReady": "",
 "GameCamera": "",
+"GuiChild": "",
 "Hitbox": "",
 "Hurtbox": "",
 "Item": "",
@@ -195,7 +247,9 @@ _global_script_class_icons={
 "StateCharacterHurt": "",
 "StateEnemy": "",
 "StateEnemyAttack": "",
+"StateEnemyAttackPound": "",
 "StateEnemyIdle": "",
+"StateEnemyJump": "",
 "StateEnemyShoot": "",
 "StateMaster": "",
 "StateMetal": "",
@@ -207,6 +261,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Hollow Carbon"
+run/main_scene="res://Scenes/Menu/TitleScreen/TitleScreen.tscn"
 config/icon="res://icon.png"
 
 [autoload]
@@ -292,6 +347,8 @@ action_down={
 
 2d_physics/layer_1="World Collision"
 2d_physics/layer_2="CharacterCollision"
+2d_physics/layer_3="HiddenFlyingCollision"
+2d_physics/layer_4="HiddenBlockedWallRideCollision"
 2d_physics/layer_10="Hitbox"
 2d_physics/layer_11="Hurtbox"
 
