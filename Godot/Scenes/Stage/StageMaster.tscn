@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Objects/Stage/Characters/Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Objects/Scripts/CollisionBox/DeathBox.gd" type="Script" id=2]
@@ -7,6 +7,11 @@
 [ext_resource path="res://Assets/2D/Tilemap/Ground.png" type="Texture" id=5]
 [ext_resource path="res://Objects/Stage/Characters/Metal/Metal.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Gui/Gui.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Objects/Scripts/Events/EventMaster.gd" type="Script" id=8]
+[ext_resource path="res://Objects/Scripts/Events/EventReady.gd" type="Script" id=9]
+[ext_resource path="res://Objects/Scripts/Events/EventBoss.gd" type="Script" id=10]
+[ext_resource path="res://Objects/Scripts/Events/EventCameraPan.gd" type="Script" id=11]
+[ext_resource path="res://Objects/Scripts/Events/EventCameraLimit.gd" type="Script" id=12]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 )
@@ -240,6 +245,8 @@ points = PoolVector2Array( 64, 32, 0, 32, 0, 0, 64, 32 )
 5/shapes = [  ]
 5/z_index = 0
 
+[sub_resource type="RectangleShape2D" id=9]
+
 [node name="StageMaster" type="Node2D"]
 script = ExtResource( 4 )
 camera_path = NodePath("GameCamera")
@@ -256,6 +263,7 @@ camera_path = NodePath("GameCamera")
 
 [node name="GameCamera" type="Camera2D" parent="."]
 script = ExtResource( 3 )
+bonus_position = Vector2( 0, -16 )
 
 [node name="Mechanics" type="Node2D" parent="."]
 
@@ -272,6 +280,37 @@ cell_size = Vector2( 32, 32 )
 format = 1
 
 [node name="Events" type="Node2D" parent="."]
+
+[node name="OnReady" type="Area2D" parent="Events"]
+script = ExtResource( 8 )
+on_ready = true
+pause_on_play = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Events/OnReady"]
+shape = SubResource( 9 )
+disabled = true
+
+[node name="EventReady" type="Node2D" parent="Events/OnReady"]
+script = ExtResource( 9 )
+
+[node name="EventBoss" type="Area2D" parent="Events"]
+script = ExtResource( 8 )
+pause_on_play = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Events/EventBoss"]
+
+[node name="EventCameraPan" type="Node2D" parent="Events/EventBoss"]
+script = ExtResource( 11 )
+
+[node name="EventCameraLimit" type="Node2D" parent="Events/EventBoss"]
+script = ExtResource( 12 )
+bottom_right_node_path = NodePath("Position2D")
+
+[node name="Position2D" type="Position2D" parent="Events/EventBoss/EventCameraLimit"]
+position = Vector2( 256, 160 )
+
+[node name="EventBoss" type="Node2D" parent="Events/EventBoss"]
+script = ExtResource( 10 )
 
 [node name="Items" type="Node2D" parent="."]
 
