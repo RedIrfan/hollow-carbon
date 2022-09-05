@@ -40,4 +40,9 @@ func physics_process(delta):
 		fsm.enter_state("idle")
 	
 	if _get_hurt():
-		body.attack_data = null
+		var decreased_damage = body.attack_data["damage"] / 2
+		body.health -= decreased_damage
+		if body.health > 0:
+			body.attack_data = null
+		else:
+			fsm.enter_state("Hurt")

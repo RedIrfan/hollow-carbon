@@ -47,6 +47,6 @@ func physics_process(delta):
 		fsm.enter_state("wallride")
 	if _get_attack():
 		body.velocity.y = 0
-		fsm.enter_state("Slash", {"air" : true})
+		fsm.enter_state("Attack", {"air" : true})
 	if _get_hurt():
 		fsm.enter_state("Hurt")

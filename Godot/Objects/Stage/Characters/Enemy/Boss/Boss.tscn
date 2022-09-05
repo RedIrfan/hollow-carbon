@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Objects/Stage/Characters/Enemy/Enemy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Objects/Stage/Characters/Enemy/Boss/State/Startup.gd" type="Script" id=2]
+[ext_resource path="res://Objects/Stage/Characters/Enemy/Boss/Boss.gd" type="Script" id=3]
+
+[node name="Boss" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+
+[node name="StateMaster" parent="." index="2"]
+initial_state_path = NodePath("Startup")
+
+[node name="Startup" type="Node" parent="StateMaster" index="0"]
+script = ExtResource( 2 )
+
+[node name="Hurt" parent="StateMaster" index="1"]
+skips_stun = true

@@ -13,6 +13,14 @@ var breaking:bool = false
 var destroyed : bool = false
 var dead : bool = false
 
+var saved_data = {
+	"destroyed" : false,
+	"dead" : false,
+	"breaking" : false,
+	"break_count" : 0,
+	"break_time_count" : 0,
+}
+
 onready var sprite: Sprite = $Sprite
 onready var animation_player : AnimationPlayer = $AnimationPlayer
 onready var area2d : Area2D = $Area2D
@@ -22,6 +30,7 @@ onready var static_body : StaticBody2D = $StaticBody2D
 
 func _ready():
 	add_to_group("Reseter")
+	add_to_group("ResetSaver")
 	
 	area2d.connect("body_entered", self, "_on_body_entered")
 	area2d.connect("body_exited", self, "_on_body_exited")
@@ -32,18 +41,34 @@ func _ready():
 
 
 func reset():
-	destroyed = false
-	dead = false
-	breaking = false
+	destroyed = saved_data["destroyed"]
+	dead = saved_data["dead"]
+	breaking = saved_data["breaking"]
 	
-	static_body.set_collision_layer_bit(0, true)
-	static_body.set_collision_mask_bit(1, true)
+	break_time_count = saved_data["break_time_count"]
+	break_count = saved_data["break_count"]
 	
-	sprite.position = Vector2(0,0)
-	sprite.frame_coords = Vector2(0,0)
+	if dead == false:
+		static_body.set_collision_layer_bit(0, true)
+		static_body.set_collision_mask_bit(1, true)
+		
+		sprite.position = Vector2(0,0)
 	
-	break_time_count = 0
-	break_count = 0
+	match break_count:
+		1:
+			sprite.frame_coords = Vector2(1,0)
+		2:
+			sprite.frame_coords = Vector2(2,0)
+		3:
+			sprite.frame_coords = Vector2(0,1)
+
+
+func save_reset():
+	saved_data["destroyed"] = destroyed
+	saved_data["dead"] = dead
+	saved_data["breaking"] = breaking
+	saved_data["break_time_count"] = break_time_count
+	saved_data["break_count"] = break_count
 
 
 func _physics_process(delta):

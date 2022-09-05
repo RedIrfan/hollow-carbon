@@ -25,4 +25,4 @@ func physics_process(delta):
 	
 	if _get_attack():
 		body.direction_x = 0
-		fsm.enter_state("Slash")
+		fsm.enter_state("Attack")

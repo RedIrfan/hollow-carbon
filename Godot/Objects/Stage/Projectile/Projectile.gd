@@ -22,7 +22,7 @@ func _ready():
 	hitbox.set_damage(damage)
 
 
-func spawn(spawner, new_position, face_direction, exception_group:String=""):
+func spawn(spawner, new_position, face_direction, exception_group:String="", param=[]):
 	Global.stage_master().add_child(self)
 	
 	body = spawner
@@ -36,15 +36,19 @@ func spawn(spawner, new_position, face_direction, exception_group:String=""):
 	
 	kill_timer.start(duration)
 	
-	_spawn_behaviour()
+	_spawn_behaviour(param)
 
 
-func _spawn_behaviour():
+func _spawn_behaviour(param=[]):
 	pass
 
 
 func _physics_process(delta):
-	var npos = direction
+	_projectile_process(delta)
+
+
+func _projectile_process(delta):
+	var npos = direction.normalized()
 	npos.x *= direction_x
 	
 	self.global_position += (npos * speed) * delta

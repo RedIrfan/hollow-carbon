@@ -14,7 +14,12 @@ onready var hurt_timer : Timer = $HurtTimer
 
 
 func _ready():
+	add_to_group("Reseter")
 	hurt_timer.connect("timeout", self, "_on_hurt_timeout")
+
+
+func reset():
+	dead = false
 
 
 func enter_condition(nbody, msg={}):
@@ -36,6 +41,7 @@ func enter_condition(nbody, msg={}):
 
 
 func enter(msg={}):
+	body.sprite_switched = -1
 	skipping = false
 	
 	if dead:
@@ -57,13 +63,14 @@ func enter(msg={}):
 
 
 func exit():
+	body.sprite_switched = 1
 	body.pivot.flash(false)
 	body.direction_x = 0
 	body.speed = body.DEFAULT_SPEED
 
 
 func physics_process(_delta):
-	if body.on_floor() and hurt_timer.is_stopped():
+	if body.is_on_floor() and hurt_timer.is_stopped():
 		fsm.enter_state(fsm.initial_state.name)
 
 

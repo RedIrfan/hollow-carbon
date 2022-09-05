@@ -142,7 +142,7 @@ extents = Vector2( 7.5, 8 )
 extents = Vector2( 7, 10 )
 
 [node name="Hollow" instance=ExtResource( 1 )]
-DEFAULT_HEALTH = 10
+DEFAULT_HEALTH = 5
 DEFAULT_SPEED = 25
 animation_player_path = NodePath("Pivot/AnimatedSprite")
 

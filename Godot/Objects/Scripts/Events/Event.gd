@@ -6,6 +6,7 @@ signal finished(event)
 
 func _ready():
 	add_to_group("Event")
+	set_physics_process(false)
 
 
 func start():
@@ -22,4 +23,5 @@ func _on_exit():
 
 func exit():
 	_on_exit()
+	set_physics_process(false)
 	finished()

@@ -1,0 +1,38 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+
+[sub_resource type="Shader" id=5]
+code = "shader_type canvas_item;
+
+uniform vec4 replace_light: hint_color = vec4(0.59, 0.84, 0.69, 1);
+uniform vec4 replace_medium: hint_color = vec4(0.36, 0.76, 0.84, 1);
+uniform vec4 replace_dark: hint_color = vec4(0.24, 0.5, 0.7, 1);
+
+const vec4 color_light = vec4(0.59, 0.84, 0.69, 1);
+const vec4 color_medium = vec4(0.36, 0.76, 0.84, 1);
+const vec4 color_dark = vec4(0.24, 0.5, 0.7, 1);
+
+const float precision = 0.1;
+
+
+void fragment(){
+	vec4 color = texture(TEXTURE, UV);
+	
+	if (distance(color, color_light) <= precision){
+		color = replace_light;
+	}
+	if (distance(color, color_medium) <= precision){
+		color = replace_medium;
+	}
+	if (distance(color, color_dark) <= precision){
+		color = replace_dark;
+	}
+	
+	COLOR = color;
+}
+"
+
+[resource]
+shader = SubResource( 5 )
+shader_param/replace_light = Color( 0.59, 0.84, 0.69, 1 )
+shader_param/replace_medium = Color( 0.36, 0.76, 0.84, 1 )
+shader_param/replace_dark = Color( 0.24, 0.5, 0.7, 1 )

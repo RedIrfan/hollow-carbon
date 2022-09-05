@@ -10,6 +10,7 @@ export(String, "Left", "Right") var facing_direction : String = "Right"
 
 var health : float = DEFAULT_HEALTH
 var speed : float = DEFAULT_SPEED
+var sprite_switched : int = 1
 
 var attack_data = null
 
@@ -33,7 +34,6 @@ func _ready():
 
 func reset():
 	attack_data = null
-	pivot.scale.x = -1 if facing_direction == "Left" else 1
 	health = DEFAULT_HEALTH
 	velocity = Vector2.ZERO
 	direction_x = 0

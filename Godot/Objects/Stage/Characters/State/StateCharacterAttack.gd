@@ -21,7 +21,10 @@ export(Array, Vector2) var states_direction = [
 ]
 export var move_speed : float = 0
 export var invisible : bool = false
+export var enter_state_to : String = ""
+export var fall_state : String = "Fall"
 
+var vel_y = 0
 enum states {
 	NONE,
 	STARTUP,
@@ -77,7 +80,11 @@ func exit():
 	body.disconnect_from_animation(self, "_on_animation_finished")
 
 
-func physics_process(_delta):
+func physics_process(delta):
+	if vel_y != 0:
+		body.velocity.y = vel_y
+	
+	
 	if _get_hurt():
 		fsm.enter_state("Hurt", {"skip" : invisible})
 
@@ -100,21 +107,29 @@ func _on_animation_finished():
 		states.STARTUP:
 			activate_damage()
 		states.ACTIVE:
-			_change_direction(states_direction[2])
-			body.play_animation(animations[2])
-			
-			state = states.RECOVERY
-			_set_damage(0)
+			activate_recovery()
 		states.RECOVERY:
 			_end_state()
 
 
+func activate_recovery():
+	_change_direction(states_direction[2])
+	body.play_animation(animations[2])
+	
+	state = states.RECOVERY
+	_set_damage(0)
+
+
 func _change_direction(dir:Vector2):
 	body.direction_x = body.pivot.scale.x * dir.x
+	vel_y = dir.y
 
 
 func _end_state():
 	if ground == true:
-		fsm.enter_state(fsm.initial_state.name)
+		if enter_state_to =="":
+			fsm.enter_state(fsm.initial_state.name)
+		else:
+			fsm.enter_state(enter_state_to)
 	else:
-		fsm.enter_state("Fall")
+		fsm.enter_state(fall_state)

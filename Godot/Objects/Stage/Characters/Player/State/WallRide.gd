@@ -9,6 +9,7 @@ onready var jump_delay_timer : Timer = $JumpDelayTimer
 
 
 func enter(msg={}):
+	body.sprite_switched = -1
 	body.direction_x = 0
 	
 	body.animation_player.offset.x = -9
@@ -16,6 +17,7 @@ func enter(msg={}):
 
 
 func exit():
+	body.sprite_switched = 1
 	body.animation_player.offset.x = 0
 	body.gravity = Global.GRAVITY
 
