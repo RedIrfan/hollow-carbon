@@ -1,0 +1,208 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Assets/2D/Menu/TitleScreen/Background.png" type="Texture" id=1]
+[ext_resource path="res://Resource/Theme/SlimButton.tres" type="Theme" id=2]
+[ext_resource path="res://Scenes/Menu/TitleScreen/TitleScreen.gd" type="Script" id=3]
+[ext_resource path="res://Assets/Music/Menu/TitleTheme.mp3" type="AudioStream" id=4]
+[ext_resource path="res://Scenes/Gui/OptionMenu/OptionMenu.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Assets/2D/Menu/TitleScreen/Logo.png" type="Texture" id=6]
+[ext_resource path="res://Scenes/Gui/FadePanel/FadePanel.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Gui/ConfirmationMenu/ConfirmationMenu.tscn" type="PackedScene" id=8]
+
+[sub_resource type="Animation" id=1]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Camera2D:zoom")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.1, 0.1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Camera2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 120, 9 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Items:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Items:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "ZoomOut"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Camera2D:zoom")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.1, 0.1 ), Vector2( 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Camera2D:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 120, 9 ), Vector2( 120, 80 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Items:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Items:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 4, 5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[node name="TitleScreen" type="Control"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Items" type="Control" parent="."]
+visible = false
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="TextureRect" type="TextureRect" parent="Items"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -115.0
+margin_top = 15.0
+margin_right = 115.0
+margin_bottom = 50.0
+texture = ExtResource( 6 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Items"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -19.0
+theme = ExtResource( 2 )
+custom_constants/separation = 6
+alignment = 1
+
+[node name="NewGameButton" type="Button" parent="Items/HBoxContainer"]
+margin_left = 7.0
+margin_right = 72.0
+margin_bottom = 19.0
+text = "New Game"
+flat = true
+
+[node name="ContinueButton" type="Button" parent="Items/HBoxContainer"]
+margin_left = 78.0
+margin_right = 138.0
+margin_bottom = 19.0
+disabled = true
+text = "Continue"
+flat = true
+
+[node name="OptionButton" type="Button" parent="Items/HBoxContainer"]
+margin_left = 144.0
+margin_right = 191.0
+margin_bottom = 19.0
+text = "Option"
+flat = true
+
+[node name="ExitButton" type="Button" parent="Items/HBoxContainer"]
+margin_left = 197.0
+margin_right = 232.0
+margin_bottom = 19.0
+text = "Exit"
+flat = true
+
+[node name="OptionMenu" parent="Items" instance=ExtResource( 5 )]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 120, 9 )
+current = true
+zoom = Vector2( 0.1, 0.1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "ZoomOut"
+anims/RESET = SubResource( 1 )
+anims/ZoomOut = SubResource( 2 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+autoplay = true
+bus = "Music"
+
+[node name="FadePanel" parent="." instance=ExtResource( 7 )]
+visible = false
+mouse_filter = 1
+
+[node name="ConfirmationMenu" parent="." instance=ExtResource( 8 )]
+
+[connection signal="pressed" from="Items/HBoxContainer/NewGameButton" to="." method="_on_NewGameButton_pressed"]
+[connection signal="pressed" from="Items/HBoxContainer/OptionButton" to="." method="_on_OptionButton_pressed"]
+[connection signal="pressed" from="Items/HBoxContainer/ExitButton" to="." method="_on_ExitButton_pressed"]
+[connection signal="exited" from="Items/OptionMenu" to="." method="_on_OptionMenu_exited"]

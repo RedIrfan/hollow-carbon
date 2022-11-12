@@ -1,0 +1,243 @@
+[gd_scene load_steps=25 format=2]
+
+[ext_resource path="res://Scenes/Menu/BoxMenu/BoxMenu.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/2D/Menu/MainMenu/Background.png" type="Texture" id=2]
+[ext_resource path="res://Assets/2D/Menu/MainMenu/Map.png" type="Texture" id=3]
+[ext_resource path="res://Assets/2D/Gui/DialogueBox/CharacterProfile/GunSlinger.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Font/HollowFont-regular, bold, italic.otf" type="DynamicFontData" id=5]
+[ext_resource path="res://Resource/Theme/BoxMenu.tres" type="Theme" id=6]
+[ext_resource path="res://Scenes/Menu/MainMenu/MainMenu.gd" type="Script" id=7]
+[ext_resource path="res://Assets/2D/Menu/MainMenu/CountrySide.png" type="Texture" id=8]
+[ext_resource path="res://Assets/2D/Menu/MainMenu/WalledCity.png" type="Texture" id=9]
+[ext_resource path="res://Scenes/Menu/MainMenu/StageButton.gd" type="Script" id=10]
+[ext_resource path="res://Scenes/Menu/MainMenu/StageInfoPanel.gd" type="Script" id=11]
+[ext_resource path="res://Assets/2D/Gui/DialogueBox/CharacterProfile/Shark.png" type="Texture" id=12]
+[ext_resource path="res://Assets/2D/Menu/MainMenu/RainForest.png" type="Texture" id=13]
+[ext_resource path="res://Assets/2D/Gui/DialogueBox/CharacterProfile/Toxic.png" type="Texture" id=14]
+
+[sub_resource type="StyleBoxFlat" id=16]
+bg_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="DynamicFont" id=13]
+font_data = ExtResource( 5 )
+
+[sub_resource type="StyleBoxFlat" id=15]
+bg_color = Color( 0.0980392, 0.0980392, 0.0980392, 1 )
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color( 0, 0, 0, 0.498039 )
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.14902, 0.188235, 0.341176, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0.521569, 0.686275, 0.721569, 1 )
+
+[sub_resource type="DynamicFont" id=14]
+size = 13
+font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=17]
+size = 14
+extra_spacing_char = -1
+font_data = ExtResource( 5 )
+
+[sub_resource type="StyleBoxFlat" id=23]
+bg_color = Color( 0.215686, 0.254902, 0.831373, 0.498039 )
+skew = Vector2( 0.5, 0 )
+
+[sub_resource type="StyleBoxEmpty" id=25]
+
+[sub_resource type="StyleBoxFlat" id=19]
+bg_color = Color( 0.105882, 0.556863, 0.819608, 0.498039 )
+skew = Vector2( 0.5, 0 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.215686, 0.254902, 0.831373, 1 )
+
+[sub_resource type="Theme" id=18]
+Button/fonts/font = SubResource( 17 )
+Button/styles/focus = SubResource( 23 )
+Button/styles/hover = SubResource( 23 )
+Button/styles/normal = SubResource( 25 )
+Button/styles/pressed = SubResource( 19 )
+
+[node name="MainMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 7 )
+
+[node name="BlackBackground" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 16 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="NinePatchRect" parent="." instance=ExtResource( 1 )]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 0.0
+margin_bottom = 0.0
+
+[node name="TextureRect" type="TextureRect" parent="."]
+self_modulate = Color( 1, 1, 1, 0.666667 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -110.0
+margin_top = -70.0
+margin_right = 110.0
+margin_bottom = 70.0
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Label" type="Label" parent="TextureRect"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 85.0
+margin_bottom = 19.0
+custom_fonts/font = SubResource( 13 )
+text = "Country Side"
+
+[node name="Panel" type="Panel" parent="TextureRect"]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -90.0
+custom_styles/panel = SubResource( 15 )
+script = ExtResource( 11 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TextureRect/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 5.0
+margin_top = 10.0
+margin_right = -5.0
+margin_bottom = -97.0
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="TextureRect/Panel/VBoxContainer"]
+margin_left = 20.0
+margin_right = 60.0
+margin_bottom = 33.0
+size_flags_horizontal = 4
+texture = ExtResource( 4 )
+flip_h = true
+
+[node name="Panel" type="Panel" parent="TextureRect/Panel/VBoxContainer/TextureRect"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 1 )
+
+[node name="Label" type="Label" parent="TextureRect/Panel/VBoxContainer"]
+margin_top = 37.0
+margin_right = 80.0
+margin_bottom = 51.0
+custom_fonts/font = SubResource( 14 )
+text = "Gun Slinger"
+align = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TextureRect/Panel/VBoxContainer"]
+margin_top = 55.0
+margin_right = 80.0
+margin_bottom = 83.0
+custom_constants/separation = 0
+
+[node name="Label3" type="Label" parent="TextureRect/Panel/VBoxContainer/VBoxContainer"]
+margin_right = 80.0
+margin_bottom = 14.0
+custom_fonts/font = SubResource( 14 )
+text = "-"
+align = 1
+
+[node name="Label2" type="Label" parent="TextureRect/Panel/VBoxContainer/VBoxContainer"]
+margin_top = 14.0
+margin_right = 80.0
+margin_bottom = 28.0
+custom_fonts/font = SubResource( 14 )
+text = "00:00:00"
+align = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="TextureRect/Panel"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -35.0
+margin_top = -44.0
+margin_right = 35.0
+margin_bottom = -10.0
+theme = ExtResource( 6 )
+
+[node name="StartButton" type="Button" parent="TextureRect/Panel/VBoxContainer2"]
+margin_right = 70.0
+margin_bottom = 15.0
+text = "Start"
+
+[node name="ExitButton" type="Button" parent="TextureRect/Panel/VBoxContainer2"]
+margin_top = 19.0
+margin_right = 70.0
+margin_bottom = 34.0
+text = "Exit"
+
+[node name="TextureRect" type="TextureRect" parent="TextureRect"]
+margin_right = 40.0
+margin_bottom = 40.0
+theme = SubResource( 18 )
+texture = ExtResource( 3 )
+
+[node name="CountrySide" type="Button" parent="TextureRect/TextureRect"]
+margin_left = 77.0
+margin_top = 75.0
+margin_right = 120.0
+margin_bottom = 102.0
+custom_constants/hseparation = -2
+toggle_mode = true
+text = "M1"
+icon = ExtResource( 8 )
+script = ExtResource( 10 )
+boss_profile = ExtResource( 4 )
+boss_name = "Gun Slinger"
+stage_name = "Country Side"
+
+[node name="WalledCity" type="Button" parent="TextureRect/TextureRect"]
+margin_left = 8.0
+margin_top = 47.0
+margin_right = 48.0
+margin_bottom = 83.0
+toggle_mode = true
+text = "m2"
+icon = ExtResource( 9 )
+script = ExtResource( 10 )
+boss_profile = ExtResource( 12 )
+boss_name = "Shark"
+stage_name = "Walled City"
+
+[node name="RainForest" type="Button" parent="TextureRect/TextureRect"]
+margin_left = 36.0
+margin_top = 91.0
+margin_right = 76.0
+margin_bottom = 127.0
+toggle_mode = true
+text = "m3"
+icon = ExtResource( 13 )
+script = ExtResource( 10 )
+boss_profile = ExtResource( 14 )
+boss_name = "Toxic"
+stage_name = "Rain Forest"
+
+[connection signal="stage_changed" from="." to="TextureRect/Panel" method="_on_MainMenu_stage_changed"]
+[connection signal="pressed" from="TextureRect/Panel/VBoxContainer2/StartButton" to="." method="_on_StartButton_pressed"]
+[connection signal="pressed" from="TextureRect/Panel/VBoxContainer2/ExitButton" to="." method="_on_ExitButton_pressed"]

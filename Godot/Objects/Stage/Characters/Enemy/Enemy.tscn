@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Objects/Stage/Characters/Character.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Objects/Stage/Characters/Enemy/State/StateEnemyDead.gd" type="Script" id=2]
+[ext_resource path="res://Objects/Stage/Characters/Enemy/Enemy.gd" type="Script" id=3]
+[ext_resource path="res://Objects/Stage/Effects/Explosion/Explosion.tscn" type="PackedScene" id=4]
+
+[node name="Enemy" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+delete_on_reset = true
+
+[node name="Dead" parent="StateMaster" index="1"]
+script = ExtResource( 2 )
+spawn_health = true
+explosion = ExtResource( 4 )
+freeze_duration = 0.1
+
+[node name="DeadTimer" type="Timer" parent="StateMaster/Dead" index="0"]
+pause_mode = 2
+one_shot = true

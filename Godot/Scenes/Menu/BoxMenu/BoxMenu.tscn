@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Assets/2D/Menu/BoxMenu/Background.png" type="Texture" id=1]
+[ext_resource path="res://Assets/2D/Menu/BoxMenu/CenterLogo.png" type="Texture" id=2]
+
+[node name="NinePatchRect" type="NinePatchRect"]
+margin_right = 64.0
+margin_bottom = 64.0
+texture = ExtResource( 1 )
+patch_margin_left = 32
+patch_margin_top = 32
+patch_margin_right = 32
+patch_margin_bottom = 32
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -16.0
+margin_top = -16.0
+margin_right = 16.0
+margin_bottom = 16.0
+texture = ExtResource( 2 )

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/StageSelect.mp3-ee46c2694799348768e6266a59787acb.mp3str"
+
+[deps]
+
+source_file="res://Assets/Music/Menu/StageSelect.mp3"
+dest_files=[ "res://.import/StageSelect.mp3-ee46c2694799348768e6266a59787acb.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

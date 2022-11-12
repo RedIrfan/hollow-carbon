@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/CountrySide.mp3-e77edbcc322bd79d3615b1e5b9a25871.mp3str"
+
+[deps]
+
+source_file="res://Assets/Music/Stage/CountrySide.mp3"
+dest_files=[ "res://.import/CountrySide.mp3-e77edbcc322bd79d3615b1e5b9a25871.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/WalledCity.mp3-a007f11dfa7b2613d47c9e0a22405d2e.mp3str"
+
+[deps]
+
+source_file="res://Assets/Music/Stage/WalledCity.mp3"
+dest_files=[ "res://.import/WalledCity.mp3-a007f11dfa7b2613d47c9e0a22405d2e.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
