@@ -12,6 +12,7 @@ onready var kill_timer : Timer = $KillTimer
 
 
 func _ready():
+# warning-ignore:return_value_discarded
 	kill_timer.connect("timeout", self, "_on_kill_timeout")
 
 

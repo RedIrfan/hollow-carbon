@@ -22,7 +22,7 @@ func _ready():
 	add_child(cooldown_timer)
 
 
-func enter(msg={}):
+func enter(_msg={}):
 	body.MAXIMUM_ENERGY = metal_maximum_energy
 	body.speed = metal_speed
 

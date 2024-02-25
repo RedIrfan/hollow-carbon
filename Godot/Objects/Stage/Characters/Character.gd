@@ -1,6 +1,7 @@
 class_name Character
 extends KinematicBody2D
 
+# warning-ignore:unused_signal
 signal dead()
 signal default_value_changed()
 
@@ -93,6 +94,7 @@ func on_floor(raycast_only:bool=false) -> bool:
 
 
 func connect_to_animation(body:Node, method_name:String):
+# warning-ignore:return_value_discarded
 	animation_player.connect("animation_finished", body, method_name)
 
 

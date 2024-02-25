@@ -19,10 +19,9 @@ func enter_gui(gui_name:String):
 	gui_name = gui_name.to_lower()
 	if guis.has(gui_name):
 		if current_gui:
-			print(current_gui.name)
 			last_gui = current_gui
-			current_gui.exit()
-			yield(current_gui, "exited")
+			last_gui.exit()
+			yield(last_gui, "exited")
 		current_gui = guis[gui_name]
 		current_gui.enter()
 		yield(get_tree().create_timer(0.01), "timeout")

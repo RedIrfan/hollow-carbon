@@ -83,7 +83,7 @@ func exit():
 	body.disconnect_from_animation(self, "_on_animation_finished")
 
 
-func physics_process(delta):
+func physics_process(_delta):
 	if vel_y != 0:
 		body.velocity.y = vel_y
 		if gravity_on:

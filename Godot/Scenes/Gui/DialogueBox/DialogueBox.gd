@@ -13,6 +13,7 @@ var check_for_player_input : bool = false
 var activated : bool = false
 
 onready var animation_player : AnimationPlayer = $AnimationPlayer
+onready var arrow_animation : AnimationPlayer = $ArrowAnimation
 onready var character_profile_left : TextureRect = $TextureRect/MarginContainer/HSplitContainer/CharacterProfileLeft
 onready var character_profile_right : TextureRect = $TextureRect/MarginContainer/HSplitContainer/CharacterProfileRight
 onready var dialogue_text_label : RichTextLabel = $TextureRect/MarginContainer/HSplitContainer/RichTextLabel
@@ -21,6 +22,7 @@ onready var dialogue_timer : Timer = $DialogueTimer
 
 
 func _ready():
+# warning-ignore:return_value_discarded
 	Global.connect("paused", self, "_on_global_paused")
 
 
@@ -34,6 +36,14 @@ func enter():
 
 
 func exit():
+	arrow_animation.play("RESET")
+	
+	activated = false
+	dialogue_texts = []
+	character_profiles = []
+	character_profiles_direction = []
+	dialogue_durations = []
+	
 	animation_player.play_backwards("Open")
 	yield(animation_player,"animation_finished")
 	.exit()
@@ -86,19 +96,16 @@ func update_profile(index = current_text_index):
 
 
 func end_dialogue():
-	activated = false
-	dialogue_texts = []
-	character_profiles = []
-	character_profiles_direction = []
-	dialogue_durations = []
 	exit()
 
 
 func physics_process(_delta):
 	if check_for_player_input:
+		arrow_animation.play("Bounce")
 		if Input.is_action_just_pressed("action_attack"):
 			current_text_index += 1
 			check_for_player_input = false
+			arrow_animation.play("RESET")
 			
 			update_dialogue()
 

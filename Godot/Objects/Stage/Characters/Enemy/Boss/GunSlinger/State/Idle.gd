@@ -36,17 +36,17 @@ func enter(msg={}):
 					fsm.enter_state("ShootUp")
 					shoot_count = 0
 				else:
-					shoot_count + 1
+					shoot_count += 1
 					fsm.enter_state("ShootFront")
 		previous_state = ""
 
 
 func _on_action_timeout():
 	var raw_distance = _get_raw_distance_to_player()
-	var distance = _get_distance_to_player()
 	var r_distance_y = abs(raw_distance.y)
 	
 	if wall_raycast.get_collider() and jump_dir == 0:
+# warning-ignore:narrowing_conversion
 		jump_dir = _get_direction_to_player().x
 	
 	if body.health < body.DEFAULT_HEALTH*0.6:

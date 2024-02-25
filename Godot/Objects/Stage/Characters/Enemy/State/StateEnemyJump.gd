@@ -15,7 +15,7 @@ func _ready():
 	jump_timer.one_shot = true
 
 
-func enter(msg={}):
+func enter(_msg={}):
 	body.play_animation(jump_animation)
 	
 	body.velocity.y -= jump_force
@@ -28,6 +28,6 @@ func exit():
 	body.direction_x = 0
 
 
-func physics_process(delta):
+func physics_process(_delta):
 	if body.is_on_floor() and jump_timer.is_stopped():
 		fsm.enter_state("Idle")

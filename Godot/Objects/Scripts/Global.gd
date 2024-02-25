@@ -7,12 +7,25 @@ signal music_volume_changed(new_volume)
 var default_game_data = {
 	"sfx_volume" : 0,
 	"music_volume" : -2.1,
+	"levels" : {
+		"CountrySide" : {
+			"rank" : '-',
+			"time" : '00:00:00',
+		},
+		"WalledCity" : {
+			"rank" : '-',
+			"time" : '00:00:00',
+		},
+		"RainForest" : {
+			"rank" : '-',
+			"time" : '00:00:00',
+		},
+	},
 }
 
-var game_data = {
-	"sfx_volume" : 0,
-	"music_volume" : -2.1,
-}
+var game_data = default_game_data
+
+var temporary_data = {}
 
 enum PAUSES {
 	NONE,
@@ -47,6 +60,14 @@ func pause(mode:bool, mode_pause:int=PAUSES.FULL):
 	emit_signal("paused", current_pause)
 
 
+func reset_temporary_data():
+	temporary_data = {}
+
+
+func set_temporary_data(value_name : String, value):
+	temporary_data[value_name] = value
+
+
 func set_current_sfx_volume(new_volume):
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Sfx"), new_volume)
 
@@ -71,6 +92,12 @@ func set_music_volume(new_volume):
 	emit_signal("music_volume_changed", new_volume)
 
 
+func get_temporary_data(value_name : String):
+	if temporary_data.has(value_name):
+		return temporary_data[value_name]
+	return null
+
+
 func get_sfx_volume():
 	return game_data["sfx_volume"]
 
@@ -85,5 +112,10 @@ func play_soundfx(new_pos, sound_file):
 	sfx.spawn(new_pos, sound_file)
 
 
-func change_scene(scene_path:String):
+func change_scene(scene_path:String, with_data:Dictionary={}):
+	reset_temporary_data()
+	if with_data.size() > 0:
+		for data in with_data:
+			set_temporary_data(data, with_data[data])
+# warning-ignore:return_value_discarded
 	get_tree().change_scene(scene_path)

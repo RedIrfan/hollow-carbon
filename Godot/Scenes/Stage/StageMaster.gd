@@ -1,6 +1,9 @@
 class_name StageMaster
 extends Node2D
 
+signal player_revived #for the onready event
+
+export var level_name : String = ""
 export var camera_path : NodePath
 export var music_path : AudioStreamMP3
 
@@ -18,6 +21,8 @@ var current_saved_position : Vector2 = Vector2.ZERO
 var player_saved_facing_direction : int = 1
 
 var player_lives : int = start_player_lives
+var player_dead : bool = false
+var enemy_dead : int = 0
 
 onready var music_player : AudioStreamPlayer = $MusicPlayer
 
@@ -49,10 +54,12 @@ func restart():
 
 
 func full_restart():
+	enemy_dead = 0
 	current_saved_position = start_position
 	player_saved_facing_direction = start_facing_direction
 	player_lives = start_player_lives
 	
+	get_tree().call_group("ResetSaver", "delete_saved_reset")
 	restart()
 
 
@@ -61,28 +68,27 @@ func save_reset():
 
 
 func _on_player_dead():
-	player_lives -= 1
-	
-	Global.pause(true)
-	yield(get_tree().create_timer(1.5), "timeout")
-	
-	gui.get_gui("FadePanel").set_fade(Tween.EASE_IN, Color(0,0,0,0), Color(0,0,0,1), 0.5)
-	gui.enter_gui("FadePanel")
-	yield(gui.get_gui("FadePanel"), "exited")
-	gui.get_gui("FadePanel").visible = true
-	
-	gui.current_gui.exit()
-	gui.current_gui = null
-	if player_lives > 0:
-		process_dead()
-	else:
-		gui.enter_gui("FailedText")
-		gui.get_gui("FailedText").visible = true
-		gui.get_gui("FadePanel").visible = false
-		yield(gui.get_gui("FailedText"), "exited")
+	if player_dead == false:
+		player_lives -= 1
+		player_dead = true
 		
-		gui.get_gui("FadePanel").visible = true
-		process_dead(true)
+		Global.pause(true)
+		yield(get_tree().create_timer(1.5), "timeout")
+		
+		gui.get_gui("FadePanel").set_fade(Tween.EASE_IN, Color(0,0,0,0), Color(0,0,0,1), 0.5, true)
+		gui.enter_gui("FadePanel")
+		yield(gui.get_gui("FadePanel"), "exited")
+		
+		gui.current_gui = null #to solve errors in the gui section where fade panel is a last gui and another gui try to enter
+		if player_lives > 0:
+			process_dead()
+		else:
+			gui.enter_gui("FailedText")
+			gui.get_gui("FailedText").visible = true
+			yield(gui.get_gui("FailedText"), "exited")
+			
+			gui.get_gui("FadePanel").visible = true
+			process_dead(true)
 
 
 func process_dead(full_dead:bool = false):
@@ -91,23 +97,37 @@ func process_dead(full_dead:bool = false):
 	else:
 		full_restart()
 	
-	gui.current_gui = null
+	yield(get_tree().create_timer(0.5), "timeout")
+	
+	
 	gui.get_gui("FadePanel").set_fade(Tween.EASE_OUT, Color(0,0,0,1), Color(0,0,0,0), 0.5)
 	gui.enter_gui("FadePanel")
-	yield(gui, "gui_changed")
-
+	yield(gui.get_gui("FadePanel"), "exited")
+	
+	player_dead = false
+	emit_signal("player_revived")
+	
+	gui.enter_gui("ReadyText")
+	yield(get_tree().create_timer(1.3), "timeout")
+	
 	gui.enter_gui("Hud")
 	yield(gui, "gui_changed")
 	Global.pause(false)
 
 
 func stage_finished():
-	gui.get_gui("FadePanel").set_fade(Tween.EASE_IN, Color(0,0,0,0), Color(0,0,0,1), 0.5)
+	gui.get_gui("FadePanel").set_fade(Tween.EASE_IN, Color(0,0,0,0), Color(0,0,0,1), 0.5, true)
 	gui.enter_gui("FadePanel")
 	yield(gui.get_gui("FadePanel"), "exited")
-	gui.get_gui("FadePanel").visible = true
 	
-	Global.change_scene("res://Scenes/Menu/MainMenu/MainMenu.tscn")
+	var data = {
+		"level_name" : level_name,
+		"lives" : player_lives,
+		"enemy" : enemy_dead,
+		"time" : 1000,
+		"rank" : "A",
+	}
+	Global.change_scene("res://Scenes/Menu/ResultMenu/ResultMenu.tscn", data)
 
 
 func set_boss(new_boss):

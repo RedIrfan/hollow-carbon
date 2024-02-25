@@ -17,7 +17,9 @@ var areas = []
 
 
 func _ready():
+# warning-ignore:return_value_discarded
 	self.connect("area_entered", self, "_on_area_entered")
+# warning-ignore:return_value_discarded
 	self.connect("area_exited", self, "_on_area_exited")
 	
 	add_to_group("Hitbox")

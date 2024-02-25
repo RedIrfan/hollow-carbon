@@ -12,6 +12,7 @@ func _ready():
 	add_child(action_timer)
 	action_timer.one_shot = true
 	
+# warning-ignore:return_value_discarded
 	action_timer.connect("timeout", self, "_on_action_timeout")
 
 

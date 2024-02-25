@@ -39,10 +39,11 @@ func exit():
 		body.speed = body.DEFAULT_SPEED
 
 
-func physics_process(delta):
+func physics_process(_delta):
 	body.play_animation("Jump")
 	
 	if walljump_timer.is_stopped():
+# warning-ignore:return_value_discarded
 		_direction_auto()
 	else:
 		body.direction_x = wall_direction * -1

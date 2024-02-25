@@ -9,11 +9,47 @@ var pan_position : Vector2 = Vector2.ZERO
 var panning : bool = false
 var player : Node = null
 
+var starting_limit : Array = [limit_left, limit_top, limit_right, limit_bottom]
+var starting_position : Vector2 = Vector2.ZERO
+
+var saved_limit : Array = []
+var saved_position : Vector2 = Vector2.ZERO
+
 
 func _ready():
 	player = Global.stage_master().player
 	
+	starting_limit = get_limit_array()
+	starting_position = self.global_position
+	
+	saved_limit = starting_limit
+	saved_position = starting_position
+	
 	current = true
+	
+	add_to_group("ResetSaver")
+	add_to_group("Reseter")
+
+
+func save_reset():
+	saved_limit = get_limit_array()
+	saved_position = self.global_position
+
+
+func delete_saved_reset():
+	saved_limit = starting_limit
+	saved_position = starting_position
+
+
+func reset():
+	limit_left = saved_limit[0]
+	limit_top = saved_limit[1]
+	limit_right = saved_limit[2]
+	limit_bottom = saved_limit[3]
+	
+	set_physics_process(false)
+	self.global_position = saved_position
+	set_physics_process(true)
 
 
 func _physics_process(delta):
@@ -30,3 +66,7 @@ func _physics_process(delta):
 func pan(mode:bool, pposition:Vector2=Vector2.ZERO):
 	panning = mode
 	pan_position = pposition
+
+
+func get_limit_array():
+	return [limit_left, limit_top, limit_right, limit_bottom]

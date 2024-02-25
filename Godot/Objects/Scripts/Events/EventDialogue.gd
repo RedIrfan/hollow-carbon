@@ -26,10 +26,18 @@ func start():
 	
 	dialogue_box.insert_dialogues(dialogue_speed, dialogue_texts, characters_profile, characters_direction, dialogue_durations)
 	
-	if gui.guis["dialoguebox"].activated == false and check_if_activated == false:
+	if dialogue_box.activated == false and check_if_activated == false:
 		gui.enter_gui("DialogueBox")
-		yield(dialogue_box, "exited")
-		if reseted == false:
-			gui.enter_gui("Hud")
+		yield(gui.get_gui("DialogueBox"), "exited")
+		_on_dialogue_box_exited()
+	else:
+		exit()
+
+
+func _on_dialogue_box_exited():
+	var gui = Global.stage_master().gui
+	
+	if Global.stage_master().player_dead == false:
+		gui.enter_gui("Hud")
 	
 	exit()

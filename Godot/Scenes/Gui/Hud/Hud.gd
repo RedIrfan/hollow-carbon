@@ -30,10 +30,11 @@ func setup():
 	health_bar.max_value = player.DEFAULT_HEALTH
 	energy_bar.max_value = player.metal.MAXIMUM_ENERGY
 	
+# warning-ignore:return_value_discarded
 	player.connect("default_value_changed", self, "_on_default_value_player_changed")
 
 
-func physics_process(delta):
+func physics_process(_delta):
 	if Global.stage_master().boss != null:
 		if boss_health_bar.visible == false:
 			boss_health_bar.visible = true

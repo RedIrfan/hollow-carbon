@@ -98,6 +98,7 @@ extents = Vector2( 16, 16 )
 z_index = 1
 z_as_relative = false
 script = ExtResource( 2 )
+break_time_duration = 0.3
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )

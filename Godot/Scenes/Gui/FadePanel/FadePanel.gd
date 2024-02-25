@@ -24,10 +24,18 @@ func set_fade(tween_ease_mode : int, from_fade_color : Color, to_fade_color: Col
 
 
 func enter():
-	.enter()
+# warning-ignore:return_value_discarded
 	tween.interpolate_property(panel, "modulate", fade_colors["from"], fade_colors["to"], fade_duration, Tween.TRANS_LINEAR, fade_mode)
+# warning-ignore:return_value_discarded
 	tween.start()
+	.enter()
 	
+	yield(tween, "tween_completed")
+	exit()
+
+
+func exit():
 	if fade_stay == false:
-		yield(tween, "tween_completed")
-		exit()
+		.exit()
+	else:
+		emit_signal("exited")

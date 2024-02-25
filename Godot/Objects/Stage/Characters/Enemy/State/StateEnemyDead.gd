@@ -29,4 +29,6 @@ func enter(_msg={}):
 
 
 func process_dead():
+	Global.stage_master().enemy_dead += 1
+	
 	body.queue_free()

@@ -15,6 +15,7 @@ func _ready():
 	floor_raycast = get_node(floor_raycast_path)
 
 
+# warning-ignore:unused_argument
 func enter(msg={}):
 	body.play_animation("Idle")
 	body.gravity = Global.GRAVITY * 0.5
@@ -27,6 +28,7 @@ func exit():
 	body.direction_x = 0
 
 
+# warning-ignore:unused_argument
 func physics_process(delta):
 	if attack_timer.is_stopped():
 		var still_attack : bool = true
@@ -53,4 +55,5 @@ func physics_process(delta):
 
 
 func _update_direction():
+# warning-ignore:narrowing_conversion
 	face_direction = _get_direction_to_player().x

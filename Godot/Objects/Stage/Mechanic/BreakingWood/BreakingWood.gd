@@ -32,11 +32,15 @@ func _ready():
 	add_to_group("Reseter")
 	add_to_group("ResetSaver")
 	
+# warning-ignore:return_value_discarded
 	area2d.connect("body_entered", self, "_on_body_entered")
+# warning-ignore:return_value_discarded
 	area2d.connect("body_exited", self, "_on_body_exited")
+# warning-ignore:return_value_discarded
 	visibility_notifier.connect("screen_exited", self, "_on_screen_exited")
 	
 	for child in set_off:
+# warning-ignore:return_value_discarded
 		self.connect("destroyed", get_node(child), "_destroy")
 
 
@@ -52,9 +56,12 @@ func reset():
 		static_body.set_collision_layer_bit(0, true)
 		static_body.set_collision_mask_bit(1, true)
 		
+		sprite.visible = true
 		sprite.position = Vector2(0,0)
 	
 	match break_count:
+		0:
+			sprite.frame_coords = Vector2(0,0)
 		1:
 			sprite.frame_coords = Vector2(1,0)
 		2:
@@ -69,6 +76,14 @@ func save_reset():
 	saved_data["breaking"] = breaking
 	saved_data["break_time_count"] = break_time_count
 	saved_data["break_count"] = break_count
+
+
+func delete_saved_reset():
+	saved_data["destroyed"] = false
+	saved_data["dead"] = false
+	saved_data["breaking"] = false
+	saved_data["break_time_count"] = 0
+	saved_data["break_count"] = 0
 
 
 func _physics_process(delta):

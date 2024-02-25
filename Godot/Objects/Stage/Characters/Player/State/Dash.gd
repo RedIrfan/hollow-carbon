@@ -17,6 +17,7 @@ onready var dust_timer : Timer = $DustTimer
 
 
 func _ready():
+# warning-ignore:return_value_discarded
 	after_image_timer.connect("timeout", self, "_on_after_image_timer_timeout")
 
 
@@ -26,7 +27,7 @@ func enter_condition(_nbody, _msg={}) -> bool:
 	return false
 
 
-func enter(msg={}):
+func enter(_msg={}):
 	body.gravity = 0
 	body.velocity.y = 0
 	
@@ -57,7 +58,7 @@ func exit():
 		after_image_timer.stop()
 
 
-func physics_process(delta):
+func physics_process(_delta):
 	if dash_timer.is_stopped() or _get_dash() == false:
 		fsm.enter_state("idle")
 	

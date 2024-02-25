@@ -9,7 +9,7 @@ func _ready():
 	add_to_group("State")
 
 
-func enter_condition(nbody, _msg={}) -> bool:
+func enter_condition(_nbody, _msg={}) -> bool:
 	return true
 
 

@@ -65,7 +65,7 @@ animations = [ {
 "name": "Stab",
 "speed": 12.0
 }, {
-"frames": [ SubResource( 8 ), SubResource( 8 ), SubResource( 8 ), SubResource( 8 ) ],
+"frames": [ SubResource( 8 ), SubResource( 8 ), SubResource( 8 ) ],
 "loop": true,
 "name": "StabRecover",
 "speed": 5.0
@@ -94,7 +94,6 @@ material = SubResource( 12 )
 use_parent_material = true
 frames = SubResource( 4 )
 animation = "Idle"
-frame = 1
 playing = true
 
 [node name="CheckFlyDistance" type="RayCast2D" parent="Pivot" index="3"]
@@ -121,7 +120,7 @@ initial_state_path = NodePath("Move")
 script = ExtResource( 5 )
 floor_raycast_path = NodePath("../../Pivot/CheckFlyDistance")
 max_distance = 32
-attack_duration = 4.0
+attack_duration = 2.0
 attack_distance = 16
 
 [node name="AttackTimer" type="Timer" parent="StateMaster/Move" index="0"]

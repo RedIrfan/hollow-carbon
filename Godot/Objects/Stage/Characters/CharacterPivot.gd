@@ -9,6 +9,7 @@ onready var flash_timer : Timer = $FlashTimer
 
 
 func _ready():
+# warning-ignore:return_value_discarded
 	flash_timer.connect("timeout", self, "_on_flash_timeout")
 	
 	flash_timer.one_shot = false

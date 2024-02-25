@@ -1,13 +1,14 @@
 extends StatePlayer
 
 
-func enter(msg={}):
+func enter(_msg={}):
 	body.play_animation("Fall")
 
 
-func physics_process(delta):
+func physics_process(_delta):
 	body.play_animation("Fall")
 	
+# warning-ignore:return_value_discarded
 	_direction_auto()
 	
 	if body.on_floor():

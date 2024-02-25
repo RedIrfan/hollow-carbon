@@ -18,6 +18,7 @@ func _ready():
 	add_to_group("Reseter")
 	add_to_group("ResetSaver")
 	
+# warning-ignore:return_value_discarded
 	visibility_notifier_2d.connect("screen_entered", self, "_on_screen_entered")
 
 
@@ -38,12 +39,18 @@ func _check_distance():
 
 
 func reset():
+#	if save_data.size() > 0:
+#		spawner_data = save_data
 	can_spawn = spawner_data["can_spawn"]
 	_check_distance()
 
 
 func save_reset():
-	save_data["can_spawn"] = can_spawn
+	spawner_data["can_spawn"] = can_spawn
+
+
+func delete_saved_reset():
+	spawner_data["can_spawn"] = true
 
 
 func _spawn_enemy():

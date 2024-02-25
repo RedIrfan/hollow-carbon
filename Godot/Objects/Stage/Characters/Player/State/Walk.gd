@@ -1,7 +1,7 @@
 extends StatePlayer
 
 
-func enter(msg={}):
+func enter(_msg={}):
 	body.speed = body.DEFAULT_SPEED
 
 

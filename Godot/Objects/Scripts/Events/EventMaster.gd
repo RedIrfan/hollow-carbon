@@ -22,6 +22,7 @@ var current_event : Node = null
 func _ready():
 	add_to_group("Reseter")
 	add_to_group("ResetSaver")
+# warning-ignore:return_value_discarded
 	self.connect("body_entered", self, "_on_body_entered")
 	
 	for child in get_children():
@@ -37,12 +38,20 @@ func save_reset():
 	save_data["activated"] = activated
 
 
+func delete_saved_reset():
+	save_data["can_activate"] = true
+	save_data["activated"] = false
+
+
 func reset():
 	last_event = null
 	current_event = null
 	
 	can_activate = save_data["can_activate"]
 	activated = save_data["activated"]
+	
+	if on_ready and can_activate:
+		_restart_event()
 
 
 func _start_up_events():
@@ -63,15 +72,17 @@ func _start_event():
 		current_event = events[process_index]
 	
 	if last_event != null:
-		last_event.disconnect("finished", self, "_on_event_finished")
+		if last_event.is_connected("finished", self, "_on_event_finished"):
+			last_event.disconnect("finished", self, "_on_event_finished")
 	
 	if current_event != null:
+# warning-ignore:return_value_discarded
 		current_event.connect("finished", self, "_on_event_finished")
 		current_event.start()
 
 
 func _restart_event():
-	can_activate = true
+	can_activate = false
 	activated = true
 	process_index = 0
 	
@@ -97,7 +108,7 @@ func _finished():
 	Global.pause(false)
 
 
-func _on_event_finished(event):
+func _on_event_finished(_event):
 	_next_event()
 
 

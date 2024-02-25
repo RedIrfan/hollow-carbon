@@ -4,7 +4,7 @@ extends Node2D
 export var speed : float = 100
 export var duration : float = 5
 export var direction : Vector2 = Vector2.RIGHT
-export var damage : float = 1
+export var damage : int = 1
 
 var direction_x : int = 0
 
@@ -17,7 +17,9 @@ onready var hitbox : Hitbox = $Hitbox
 
 func _ready():
 	add_to_group("Projectile")
+# warning-ignore:return_value_discarded
 	kill_timer.connect("timeout", self, "_on_kill_timeout")
+# warning-ignore:return_value_discarded
 	hitbox.connect("hit", self, "_on_hitbox_hit")
 	
 	hitbox.set_damage(damage)
@@ -40,7 +42,7 @@ func spawn(spawner, new_position, face_direction, exception_group:String="", par
 	_spawn_behaviour(param)
 
 
-func _spawn_behaviour(param=[]):
+func _spawn_behaviour(_param=[]):
 	pass
 
 
@@ -59,7 +61,7 @@ func _on_kill_timeout():
 	_destroy()
 
 
-func _on_hitbox_hit(area):
+func _on_hitbox_hit(_area):
 	_destroy()
 
 

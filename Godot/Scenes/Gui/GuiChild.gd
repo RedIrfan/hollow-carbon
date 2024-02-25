@@ -1,6 +1,7 @@
 class_name GuiChild
 extends Control
 
+# warning-ignore:unused_signal
 signal entered()
 signal exited()
 
@@ -16,6 +17,8 @@ func enter():
 
 func exit():
 	self.visible = false
+	
+	yield(get_tree().create_timer(0.1), "timeout")
 	emit_signal("exited")
 
 

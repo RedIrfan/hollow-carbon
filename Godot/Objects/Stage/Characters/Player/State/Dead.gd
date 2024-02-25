@@ -3,7 +3,7 @@ extends StatePlayer
 var explosion = preload("res://Objects/Stage/Effects/Explosion/Explosion.tscn")
 
 
-func enter(msg={}):
+func enter(_msg={}):
 	body.direction_x = 0
 	body.visible = false
 	

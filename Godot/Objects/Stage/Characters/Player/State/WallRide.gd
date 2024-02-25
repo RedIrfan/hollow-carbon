@@ -12,7 +12,7 @@ onready var jump_delay_timer : Timer = $JumpDelayTimer
 onready var dust_timer : Timer = $DustTimer
 
 
-func enter(msg={}):
+func enter(_msg={}):
 	body.sprite_switched = -1
 	body.direction_x = 0
 	
@@ -30,7 +30,7 @@ func exit():
 	dust_timer.stop()
 
 
-func physics_process(delta):
+func physics_process(_delta):
 	if jump_delay_timer.is_stopped():
 		if jumped:
 			fsm.enter_state("jump", {"wall_direction" : body.pivot.scale.x})
@@ -40,6 +40,7 @@ func physics_process(delta):
 		
 		body.velocity.y = 3
 		
+# warning-ignore:return_value_discarded
 		_direction_auto()
 		
 		if _get_wallride() == false:

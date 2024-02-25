@@ -10,6 +10,7 @@ var pickup_sfx = load("res://Assets/Soundfx/Game/PickupSound.wav")
 
 
 func _ready():
+# warning-ignore:return_value_discarded
 	area2d.connect("body_entered", self ,"_on_body_entered")
 
 

@@ -3,7 +3,7 @@ extends Effect
 onready var animation : AnimatedSprite = $AnimatedSprite
 
 
-func _spawn_behaviour(param={}):
+func _spawn_behaviour(_param={}):
 	animation.play("default")
 
 

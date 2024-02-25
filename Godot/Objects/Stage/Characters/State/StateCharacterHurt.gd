@@ -16,6 +16,7 @@ onready var hurt_timer : Timer = $HurtTimer
 
 func _ready():
 	add_to_group("Reseter")
+# warning-ignore:return_value_discarded
 	hurt_timer.connect("timeout", self, "_on_hurt_timeout")
 
 
@@ -45,7 +46,7 @@ func enter_condition(nbody, msg={}):
 	return true
 
 
-func enter(msg={}):
+func enter(_msg={}):
 	play_sfx()
 	body.sprite_switched = -1
 	skipping = false

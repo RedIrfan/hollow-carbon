@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=2]
+[gd_scene load_steps=58 format=2]
 
 [ext_resource path="res://Objects/Stage/Characters/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Objects/Stage/Characters/Player/State/Idle.gd" type="Script" id=2]
@@ -13,9 +13,6 @@
 [ext_resource path="res://Objects/Scripts/CollisionBox/Hitbox.gd" type="Script" id=11]
 [ext_resource path="res://Objects/Scripts/CollisionBox/Hurtbox.gd" type="Script" id=12]
 [ext_resource path="res://Objects/Stage/Characters/Player/State/Dead.gd" type="Script" id=13]
-[ext_resource path="res://Objects/Scripts/State/StateMaster.gd" type="Script" id=14]
-[ext_resource path="res://Objects/Stage/Characters/Player/State/PowerState/CheckPower.gd" type="Script" id=15]
-[ext_resource path="res://Objects/Stage/Characters/Player/State/PowerState/PowerState.gd" type="Script" id=16]
 [ext_resource path="res://Objects/Stage/Characters/Player/State/Attack.gd" type="Script" id=17]
 [ext_resource path="res://Assets/Soundfx/Game/SlashSound.wav" type="AudioStream" id=18]
 [ext_resource path="res://Objects/Stage/Characters/Player/State/DownStab.gd" type="Script" id=19]
@@ -288,6 +285,7 @@ z_index = 1
 z_as_relative = false
 collision_mask = 9
 script = ExtResource( 4 )
+DEFAULT_HEALTH = 30
 DEFAULT_SPEED = 80
 animation_player_path = NodePath("Pivot/AnimatedSprite")
 
@@ -299,6 +297,7 @@ pause_mode = 2
 use_parent_material = true
 frames = SubResource( 2 )
 animation = "DownStab"
+frame = 1
 playing = true
 
 [node name="CheckWall" type="RayCast2D" parent="Pivot" index="2"]
@@ -337,31 +336,7 @@ body_path = NodePath("../..")
 position = Vector2( 0.5, 12 )
 shape = SubResource( 67 )
 
-[node name="PowerStateMaster" type="Node" parent="." index="2"]
-script = ExtResource( 14 )
-initial_state_path = NodePath("CheckPower")
-body_path = NodePath("..")
-
-[node name="CheckPower" type="Node" parent="PowerStateMaster" index="0"]
-script = ExtResource( 15 )
-
-[node name="Carbon" type="Node" parent="PowerStateMaster" index="1"]
-script = ExtResource( 16 )
-player_health = 50
-
-[node name="Icarus" type="Node" parent="PowerStateMaster" index="2"]
-script = ExtResource( 16 )
-player_health = 80
-player_speed = 100
-player_damage_multiplier = 0.8
-
-[node name="Hercules" type="Node" parent="PowerStateMaster" index="3"]
-script = ExtResource( 16 )
-player_health = 110
-player_speed = 65
-player_damage_multiplier = 1.5
-
-[node name="StateMaster" parent="." index="3"]
+[node name="StateMaster" parent="." index="2"]
 initial_state_path = NodePath("Idle")
 
 [node name="Idle" type="Node" parent="StateMaster" index="0"]
@@ -384,7 +359,7 @@ script = ExtResource( 6 )
 
 [node name="Dash" type="Node" parent="StateMaster" index="4"]
 script = ExtResource( 7 )
-dash_duration = 0.7
+dash_duration = 0.5
 dash_speed = 150
 after_image_interval = 0.07
 
@@ -453,7 +428,7 @@ hitbox_path = NodePath("../../Pivot/HitboxDown")
 [node name="Dead" parent="StateMaster" index="12"]
 script = ExtResource( 13 )
 
-[node name="Hurtbox" type="Area2D" parent="." index="4"]
+[node name="Hurtbox" type="Area2D" parent="." index="3"]
 visible = false
 collision_layer = 1024
 collision_mask = 512

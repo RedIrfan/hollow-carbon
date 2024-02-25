@@ -3,6 +3,7 @@ extends Control
 signal stage_changed(button_node)
 
 var current_stage : String = ""
+var current_stage_path : String
 var stage_buttons = {}
 
 onready var buttons_parent = $TextureRect/TextureRect
@@ -21,7 +22,7 @@ func _on_ExitButton_pressed():
 
 
 func _on_StartButton_pressed():
-	pass # Replace with function body.
+	Global.change_scene(current_stage_path)
 
 
 func change_stage(stage_name:String):
@@ -30,4 +31,5 @@ func change_stage(stage_name:String):
 			stage_buttons[button].pressed = false
 		stage_buttons[stage_name].pressed = true
 		current_stage = stage_name
+		current_stage_path = stage_buttons[stage_name].stage_path
 		emit_signal("stage_changed", stage_buttons[stage_name])

@@ -4,6 +4,7 @@ extends AudioStreamPlayer2D
 
 func _ready():
 	self.bus = "Sfx"
+# warning-ignore:return_value_discarded
 	self.connect("finished", self, "_on_audio_finished")
 
 

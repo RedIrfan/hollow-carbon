@@ -20,9 +20,11 @@ func _ready():
 	add_to_group("Reseter")
 	add_to_group("ResetSaver")
 	
+# warning-ignore:return_value_discarded
 	animation_player.connect("animation_finished", self, "_on_animation_finished")
 	
 	area = get_node(area_path)
+# warning-ignore:return_value_discarded
 	area.connect("body_entered", self, "_on_body_entered")
 	
 	saved_current_mode = modes.BLOCKED if starting_mode == "Blocked" else modes.OPENED

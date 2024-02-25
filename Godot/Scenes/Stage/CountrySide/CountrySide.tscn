@@ -374,6 +374,7 @@ extents = Vector2( 32, 10 )
 extents = Vector2( 108.5, 16 )
 
 [node name="StageMaster" instance=ExtResource( 1 )]
+level_name = "CountrySide"
 
 [node name="Background" type="ParallaxLayer" parent="ParallaxBackground" index="0"]
 motion_scale = Vector2( 0, 0 )
@@ -438,7 +439,6 @@ position = Vector2( -93, 64 )
 
 [node name="GameCamera" parent="." index="4"]
 pause_mode = 2
-position = Vector2( 2504, -113 )
 limit_left = -120
 limit_bottom = 96
 
@@ -525,15 +525,15 @@ tile_data = PoolIntArray( -65479, 1073741833, 0, -65478, 1073741833, 0, -65470, 
 pause_mode = 2
 position = Vector2( -138, 64 )
 
-[node name="EventMaster" type="Area2D" parent="Events" index="1"]
+[node name="EventDialogue1" type="Area2D" parent="Events" index="1"]
 position = Vector2( -10, 54 )
 script = ExtResource( 9 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Events/EventMaster" index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Events/EventDialogue1" index="0"]
 position = Vector2( 0, -61 )
 shape = SubResource( 21 )
 
-[node name="EventDialogue" type="Node2D" parent="Events/EventMaster" index="1"]
+[node name="EventDialogue" type="Node2D" parent="Events/EventDialogue1" index="1"]
 script = ExtResource( 24 )
 dialogue_speed = 0.05
 dialogue_texts = [ "Metal: You can jump using the J button", "Metal: and Slash using the K button" ]

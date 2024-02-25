@@ -26,6 +26,7 @@ func _on_action_timeout():
 	var distance = _get_distance_to_player()
 	
 	if wall_raycast.get_collider() and jump_dir == 0:
+# warning-ignore:narrowing_conversion
 		jump_dir = _get_direction_to_player().x
 	
 	if distance > jump_forward_distance or jump_dir != 0:

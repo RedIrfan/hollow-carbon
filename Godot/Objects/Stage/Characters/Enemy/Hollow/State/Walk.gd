@@ -13,7 +13,7 @@ func _ready():
 	front_raycast = get_node(front_raycast_path)
 
 
-func enter(msg={}):
+func enter(_msg={}):
 	body.play_animation("Walk")
 	walk_direction = body.pivot.scale.x
 
@@ -22,11 +22,12 @@ func exit():
 	body.direction_x = 0
 
 
-func physics_process(delta):
+func physics_process(_delta):
 	if _get_hurt():
 		fsm.enter_state("Hurt")
 		
 	if _get_raw_distance_to_player().y < 0.1 and _get_raw_distance_to_player().y > -0.1:
+# warning-ignore:narrowing_conversion
 		walk_direction = _get_direction_to_player().x
 	elif front_raycast.get_collider() == null and direction_timer.is_stopped():
 		walk_direction *= -1

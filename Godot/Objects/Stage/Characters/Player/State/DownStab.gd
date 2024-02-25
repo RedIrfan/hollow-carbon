@@ -12,7 +12,7 @@ func _ready():
 	hitbox = get_node(hitbox_path)
 
 
-func enter(msg={}):
+func enter(_msg={}):
 	body.speed = strafing_speed
 	
 	body.play_animation('DownStab')
@@ -26,9 +26,10 @@ func exit():
 	hitbox.set_damage(0)
 
 
-func physics_process(delta):
+func physics_process(_delta):
 	body.velocity.y = falling_speed
 	
+# warning-ignore:return_value_discarded
 	_direction_auto()
 	
 	if body.is_on_floor():
